@@ -1,4 +1,4 @@
-# DW2
+# HessCODE
 
 Projet Dev Web 2 (2020/2021)
 
@@ -10,3 +10,11 @@ Projet Dev Web 2 (2020/2021)
     * BDD : mysql8 
         * User : Root
         * Password : dzer56Hr
+
+## BDD
+
+Pour ajouter la base de données du projet à votre bdd locale.
+Il faut aller dans le dossier BDD, et faire 
+```bash
+    mysql -u root -p < bdd_init.sql
+```
