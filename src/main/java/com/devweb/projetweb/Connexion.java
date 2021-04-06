@@ -1,4 +1,4 @@
-package com.example.projetweb;
+package com.devweb.projetweb;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
