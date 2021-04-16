@@ -1,4 +1,4 @@
-package com.example.projetweb;
+package dw2.projetweb.db;
 
 import java.sql.*;
 
@@ -46,6 +46,11 @@ public class DbServer
 
             System.out.println("Nombre de ligne modifiees " + res);
         }
+    }
+
+    public void createDB() throws SQLException
+    {
+        requete("CREATE DATABASE "  + c.getJDBC_DBNAME());
     }
 
     // Getters and Setters
