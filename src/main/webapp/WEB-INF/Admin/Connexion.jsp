@@ -1,17 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: ranyg961
-  Date: 4/4/21
-  Time: 10:56 PM
+  Date: 4/18/21
+  Time: 12:01 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Installation</title>
+    <title>Connexion</title>
 </head>
 <body>
-
-
+  <h1> Connexion </h1>
 </body>
 </html>

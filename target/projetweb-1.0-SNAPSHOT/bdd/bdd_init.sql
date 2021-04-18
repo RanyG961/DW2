@@ -1,9 +1,8 @@
-DROP DATABASE IF EXISTS `hesscode`;
-CREATE DATABASE `hesscode`;
-
-USE hesscode;
-
-CREATE TABLE user (
+# DROP DATABASE IF EXISTS `hesscode`;
+# CREATE DATABASE `hesscode`;
+#
+# USE hesscode;
+CREATE TABLE users (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,

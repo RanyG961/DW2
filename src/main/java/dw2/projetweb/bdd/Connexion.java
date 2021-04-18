@@ -1,4 +1,4 @@
-package dw2.projetweb.db;
+package dw2.projetweb.bdd;
 
 import java.sql.*;
 
@@ -23,6 +23,7 @@ public class Connexion
     {
         try
         {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
             cxn = DriverManager.getConnection(JDBC_CONNEXION, JDBC_USER, JDBC_PWD);
             System.out.println("Connexion OK !");
 

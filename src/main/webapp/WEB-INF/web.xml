@@ -6,8 +6,16 @@
     <jsp-config>
         <jsp-property-group>
             <url-pattern> *.jsp </url-pattern>
-            <include-prelude> WEB-INF/taglibs.jsp </include-prelude>
+            <include-prelude> /WEB-INF/taglibs.jsp </include-prelude>
         </jsp-property-group>
     </jsp-config>
 
+<!--    <servlet>-->
+<!--        <servlet-name>Bdd_install</servlet-name>-->
+<!--        <servlet-class>dw2.projetweb.servlets.Bdd_install</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Bdd_install</servlet-name>-->
+<!--        <url-pattern>/Bdd_install</url-pattern>-->
+<!--    </servlet-mapping>-->
 </web-app>
