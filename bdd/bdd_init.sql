@@ -1,13 +1,14 @@
-# DROP DATABASE IF EXISTS `hesscode`;
-# CREATE DATABASE `hesscode`;
-#
-# USE hesscode;
-CREATE TABLE users (
+DROP DATABASE IF EXISTS `hesscode`;
+CREATE DATABASE `hesscode`;
+
+USE hesscode;
+
+CREATE TABLE user (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     birthdate DATE NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    password VARCHAR(50) NOT NULL,
     nickname VARCHAR(10) NOT NULL,
     mail VARCHAR(255) NOT NULL,
     is_admin BOOLEAN NOT NULL DEFAULT FALSE

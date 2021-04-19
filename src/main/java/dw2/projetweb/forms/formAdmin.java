@@ -4,6 +4,7 @@ import dw2.projetweb.bdd.Connexion;
 import dw2.projetweb.bdd.DbServer;
 import org.mindrot.jbcrypt.BCrypt;
 import static org.apache.commons.text.StringEscapeUtils.escapeHtml4;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
@@ -11,10 +12,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class formInstallAdmin
+public class formAdmin
 {
     private Connexion c = new Connexion();
     private DbServer s = new DbServer(c);
@@ -46,6 +50,19 @@ public class formInstallAdmin
        return !admin.isEmpty();
     }
 
+    public boolean tableExists() throws SQLException
+    {
+        String nomBDD = c.getJDBC_DBNAME();
+        String req = "SHOW TABLES IN " + nomBDD;
+        String res = s.requete(req);
+
+       if(Integer.parseInt(res) == 0)
+       {
+           return false;
+       }
+       return true;
+    }
+
     public void createTable(HttpServletRequest req) throws IOException
     {
         Path path = Paths.get(req.getServletContext().getRealPath("bdd/bdd_init.sql"));
@@ -63,7 +80,7 @@ public class formInstallAdmin
         c.deconnexion();
     }
 
-    public User inscrireUser(HttpServletRequest request)
+    public User inscrireUser(HttpServletRequest request) throws ParseException
     {
         String nom = getValeurChamp(request, cNom);
         String prenom = getValeurChamp(request, cPrenom);
@@ -72,7 +89,6 @@ public class formInstallAdmin
         String pwd = getValeurChamp(request, cPassword);
         String pwdConfirm = getValeurChamp(request, cPwdConfirm);
         String nickname = getValeurChamp(request, cPseudo);
-
 
         User u = new User();
 
@@ -117,7 +133,8 @@ public class formInstallAdmin
             }
             u.setNom(nom);
             u.setPrenom(prenom);
-//            u.setDateNaissance(dateNaiss);
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateNaiss);
+            u.setDateNaissance(date);
         }
         else
         {
@@ -130,18 +147,6 @@ public class formInstallAdmin
 
     public void passwordExists(String password, String pwdConfirm) throws Exception
     {
-        String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-
-        System.out.println(hashed);
-
-        if(BCrypt.checkpw("Ranyleboss@961", hashed))
-        {
-            System.out.println("It matches");
-        }
-        else
-        {
-            System.out.println("It doesn't match");
-        }
         if(!password.equals(pwdConfirm))
         {
             throw new Exception("Problème dans la confirmation du mot de passe");
@@ -192,17 +197,19 @@ public class formInstallAdmin
         }
     }
 
-    public void createAccount(String nom, String prenom, String dateNaiss, String email, String pwd, String pwdConfirm, String nickname) throws Exception
+    public boolean createAccount(String nom, String prenom, String dateNaiss, String email, String pwd, String pwdConfirm, String nickname) throws Exception
     {
+        String salt = BCrypt.gensalt(12);
         nom = escapeHtml4(nom);
         prenom = escapeHtml4(prenom);
         dateNaiss = escapeHtml4(dateNaiss);
         email = escapeHtml4(email);
         pwd = escapeHtml4(pwd);
-        pwd = BCrypt.hashpw(pwd, BCrypt.gensalt());
+        pwd = BCrypt.hashpw(pwd, salt);
         pwdConfirm = escapeHtml4(pwdConfirm);
         nickname = escapeHtml4(nickname);
 
+        System.out.println("Salt = " + salt);
 
         if(nom.isEmpty() || prenom.isEmpty() || dateNaiss.isEmpty() || email.isEmpty() || pwd.isEmpty() || pwdConfirm.isEmpty() || nickname.isEmpty())
         {
@@ -210,7 +217,7 @@ public class formInstallAdmin
         }
         else
         {
-            String req = "INSERT INTO users(first_name, last_name, birthdate, password, nickname, mail, is_admin) VALUES('" + prenom + "', '" + nom + "', '" + dateNaiss + "', '" + pwd + "', '" + nickname + "', '" + email + "'," + 1 + ");";
+            String req = "INSERT INTO users(first_name, last_name, birthdate, password, nickname, mail, is_admin) VALUES('" + prenom + "', '" + nom + "', '" + dateNaiss + "', '" + pwd  + "', '" + nickname + "', '" + email + "'," + 1 + ");";
 //            System.out.println(req);
             String res = s.requete(req);
 
@@ -218,9 +225,30 @@ public class formInstallAdmin
             {
                 throw new Exception("L'insertion a échouée");
             }
-
+            else return Integer.valueOf(res) == 1;
 //            System.out.println("Ca a marché");
         }
+    }
+
+    public boolean verifAccount(HttpServletRequest request) throws Exception
+    {
+        String identifiant = escapeHtml4(getValeurChamp(request, "identifiant"));
+        String pwd = escapeHtml4(getValeurChamp(request, "pwd"));
+
+        String req = "SELECT password FROM users WHERE mail = '" + identifiant + "' OR nickname = '" + identifiant + "'";
+        String res = s.requete(req);
+
+        res = StringUtils.chop(res);
+
+        if(BCrypt.checkpw(pwd, res))
+        {
+            return true;
+        }
+        else
+        {
+            throw new Exception("La vérification à échouée");
+        }
+
     }
 
     /*
