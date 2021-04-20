@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class formAdmin
+public class FormAdmin
 {
     private Connexion c = new Connexion();
     private DbServer s = new DbServer(c);

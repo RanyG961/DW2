@@ -10,12 +10,12 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import dw2.projetweb.beans.User;
-import dw2.projetweb.forms.formAdmin;
+import dw2.projetweb.forms.FormAdmin;
 
 @WebServlet("/Admin_install")
 public class Admin_install extends HttpServlet
 {
-    private formAdmin formIA = new formAdmin();
+    private FormAdmin formIA = new FormAdmin();
 
     public Admin_install()
     {
