@@ -1,19 +1,15 @@
-package com.devweb.projetweb;
+package dw2.projetweb.db;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
 import java.sql.*;
 
 //@WebServlet(name = "connexion", value = "/connexion")
 public class Connexion
 {
-    final String JDBC_CONNEXION = "jdbc:mysql://localhost:3306/hesscode";
+    final String JDBC_DBNAME = "hesscode";
+    final String JDBC_CONNEXION = "jdbc:mysql://localhost:3306/" + JDBC_DBNAME;
     final String JDBC_USER = "root";
     final String JDBC_PWD = "dzer56Hr";
+
 
     public Connection cxn = null;
     public Statement stmt = null;
@@ -149,5 +145,10 @@ public class Connexion
     public void setRes(int res)
     {
         this.res = res;
+    }
+
+    public String getJDBC_DBNAME()
+    {
+        return JDBC_DBNAME;
     }
 }
