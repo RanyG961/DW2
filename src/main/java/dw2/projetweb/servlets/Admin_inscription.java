@@ -12,12 +12,12 @@ import java.text.ParseException;
 import dw2.projetweb.beans.User;
 import dw2.projetweb.forms.FormAdmin;
 
-@WebServlet("/Admin_install")
-public class Admin_install extends HttpServlet
+@WebServlet("/Admin_inscription")
+public class Admin_inscription extends HttpServlet
 {
     private FormAdmin formIA = new FormAdmin();
 
-    public Admin_install()
+    public Admin_inscription()
     {
         super();
     }
@@ -31,7 +31,7 @@ public class Admin_install extends HttpServlet
             {
                 if(!formIA.adminExists())
                 {
-                    this.getServletContext().getRequestDispatcher("/WEB-INF/Admin/admin_install.jsp").forward(req, resp);
+                    this.getServletContext().getRequestDispatcher("/WEB-INF/Admin/admin_inscription.jsp").forward(req, resp);
                 }
                 else
                 {
@@ -41,7 +41,7 @@ public class Admin_install extends HttpServlet
             else
             {
                 formIA.createTable(req);
-                this.getServletContext().getRequestDispatcher("/WEB-INF/Admin/admin_install.jsp").forward(req, resp);
+                this.getServletContext().getRequestDispatcher("/WEB-INF/Admin/admin_inscription.jsp").forward(req, resp);
             }
 
         } catch (SQLException throwables)
@@ -53,7 +53,7 @@ public class Admin_install extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        User u = null;
+        User u = new User();
         try
         {
             u = formIA.inscrireUser(req);
@@ -67,11 +67,11 @@ public class Admin_install extends HttpServlet
 
         if(formIA.getErreurs().isEmpty())
         {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
         }
         else
         {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/Admin/admin_install.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/Admin/admin_inscription.jsp").forward(req, resp);
 
         }
     }

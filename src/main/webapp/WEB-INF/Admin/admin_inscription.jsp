@@ -7,7 +7,7 @@
 <body>
 <h1> Create an admin account </h1>
 <div class="formulaire">
-    <form id="formInscription" class="form-margin-top" action="Admin_install" method="post">
+    <form id="formInscription" class="form-margin-top" action="Admin_inscription" method="post">
         <div class="form-width">
             <input type="text" id="nom" name="nom" placeholder="Nom" required />
             <input type="text" id="prenom" name="prenom" placeholder="Prenom" required />

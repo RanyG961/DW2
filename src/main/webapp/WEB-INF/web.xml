@@ -5,7 +5,7 @@
          version="4.0">
 
     <welcome-file-list>
-        <welcome-file>/WEB-INF/index.jsp</welcome-file>
+        <welcome-file>/WEB-INF/home.jsp</welcome-file>
     </welcome-file-list>
 
     <jsp-config>
@@ -17,7 +17,7 @@
 
 <!--    <servlet>-->
 <!--        <servlet-name>Bdd_install</servlet-name>-->
-<!--        <servlet-class>dw2.projetweb.servlets.Admin_install</servlet-class>-->
+<!--        <servlet-class>dw2.projetweb.servlets.Admin_inscription</servlet-class>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
 <!--        <servlet-name>Bdd_install</servlet-name>-->
