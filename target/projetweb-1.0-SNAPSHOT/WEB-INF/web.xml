@@ -3,11 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/index.jsp</welcome-file>
+    </welcome-file-list>
+
     <jsp-config>
         <jsp-property-group>
             <url-pattern> *.jsp </url-pattern>
-            <include-prelude> WEB-INF/taglibs.jsp </include-prelude>
+            <include-prelude> /WEB-INF/taglibs.jsp </include-prelude>
         </jsp-property-group>
     </jsp-config>
 
+<!--    <servlet>-->
+<!--        <servlet-name>Bdd_install</servlet-name>-->
+<!--        <servlet-class>dw2.projetweb.servlets.Admin_install</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Bdd_install</servlet-name>-->
+<!--        <url-pattern>/Bdd_install</url-pattern>-->
+<!--    </servlet-mapping>-->
 </web-app>

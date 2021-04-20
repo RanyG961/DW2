@@ -1,4 +1,4 @@
-package dw2.projetweb.db;
+package dw2.projetweb.bdd;
 
 import java.sql.*;
 
@@ -22,12 +22,14 @@ public class DbServer
         res = c.getRes();
     }
 
-    public void requete(String query) throws SQLException
+    public String requete(String query) throws SQLException
     {
         String[] premierMot = query.split(" ");
+        String resultat = null;
 
         if  (premierMot[0].equalsIgnoreCase("select"))
         {
+            resultat = "";
             rs = stmt.executeQuery(query);
             rsmd = rs.getMetaData();
 
@@ -35,9 +37,11 @@ public class DbServer
             {
                 for (int i = 1; i <= rsmd.getColumnCount(); i++)
                 {
-                    System.out.println(rs.getString(i) + " ");
+//                    System.out.println(rs.getString(i) + " ");
+                    resultat += (rs.getString(i) + " ");
+
                 }
-                System.out.println();
+//                System.out.println();
             }
         }
         else
@@ -45,12 +49,21 @@ public class DbServer
             res = stmt.executeUpdate(query);
 
             System.out.println("Nombre de ligne modifiees " + res);
+
+            resultat = String.valueOf(res);
         }
+
+        return resultat;
     }
 
     public void createDB() throws SQLException
     {
         requete("CREATE DATABASE "  + c.getJDBC_DBNAME());
+    }
+
+    public void disconnectDB()
+    {
+        c.deconnexion();
     }
 
     // Getters and Setters
