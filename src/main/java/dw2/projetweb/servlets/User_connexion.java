@@ -1,5 +1,6 @@
 package dw2.projetweb.servlets;
 
+import dw2.projetweb.beans.User;
 import dw2.projetweb.forms.FormUser;
 
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/User_connexion")
@@ -28,19 +30,27 @@ public class User_connexion extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        User u = new User();
+        HttpSession session = req.getSession();
+
         try
         {
-            if(formU.verifAccount(req))
-            {
-                this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
-            }
-            else
-            {
-                this.getServletContext().getRequestDispatcher("/WEB-INF/Site/user_connexion.jsp").forward(req, resp);
-            }
-        } catch (Exception throwables)
+            u = formU.connexion(req);
+        } catch (Exception e)
         {
-            throwables.printStackTrace();
+            e.printStackTrace();
+        }
+
+        req.setAttribute("formU", formU);
+        req.setAttribute("User", u);
+
+        if (formU.getErreurs().isEmpty())
+        {
+            session.setAttribute("sessionU", u);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+        } else
+        {
+            this.getServletContext().getRequestDispatcher("/WEB-INF/Site/user_connexion.jsp").forward(req, resp);
         }
     }
 }

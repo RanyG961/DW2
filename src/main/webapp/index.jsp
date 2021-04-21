@@ -13,7 +13,7 @@
 </head>
 <body>
 <div>
-    <h2> Admin </h2>
+    <h2>Admin </h2>
     <a href="Admin_inscription"> Inscription admin </a>
     <a href="Admin_connexion"> Connexion</a>
 </div>
@@ -23,6 +23,8 @@
     <a href="User_inscription"> Inscription </a>
     <a href="User_connexion"> Connexion</a>
 </div>
+
+<p> Salut ${sessionScope.sessionU.mail}</p>
 
 <c:if test="${sessionScope.sessionU.mail ne null}">
     <p> Wesh le S ${sessionScope.sessionU.mail} </p>

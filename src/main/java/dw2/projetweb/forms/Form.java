@@ -28,6 +28,7 @@ public class Form
     private String cPassword = "pwd";
     private String cPwdConfirm = "pwdConfirm";
     private String cMail = "email";
+    private String cIdentifiant = "identifiant";
     private boolean cAdmin;
 
     private boolean resultat;
@@ -98,36 +99,6 @@ public class Form
         return u;
     }
 
-    public Connexion getC()
-    {
-        return c;
-    }
-
-    public void setC(Connexion c)
-    {
-        this.c = c;
-    }
-
-    public DbServer getS()
-    {
-        return s;
-    }
-
-    public void setS(DbServer s)
-    {
-        this.s = s;
-    }
-
-    public String getcPwdConfirm()
-    {
-        return cPwdConfirm;
-    }
-
-    public void setcPwdConfirm(String cPwdConfirm)
-    {
-        this.cPwdConfirm = cPwdConfirm;
-    }
-
     public boolean createAccount(String nom, String prenom, String dateNaiss, String email, String pwd, String pwdConfirm, String nickname, Boolean admin) throws Exception
     {
         String salt = BCrypt.gensalt(12);
@@ -162,11 +133,47 @@ public class Form
         }
     }
 
-    public boolean verifAccount(HttpServletRequest request) throws Exception
+    public User connexion(HttpServletRequest req) throws Exception
     {
-        String identifiant = escapeHtml4(getValeurChamp(request, "identifiant"));
-        String pwd = escapeHtml4(getValeurChamp(request, "pwd"));
+        String identifiant = escapeHtml4(getValeurChamp(req, "identifiant"));
+        String pwd = escapeHtml4(getValeurChamp(req, "pwd"));
 
+        User u = new User();
+
+        try
+        {
+            verifAccount(identifiant, pwd);
+        }
+        catch (Exception e)
+        {
+            setErreur(cIdentifiant, e.getMessage());
+            setErreur(cPassword, e.getMessage());
+        }
+
+
+
+        if(erreurs.isEmpty())
+        {
+            if(identifiant.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)"))
+            {
+                u.setMail(identifiant);
+            }
+            else
+            {
+                u.setPseudo(identifiant);
+            }
+            resultat = true;
+        }
+        else
+        {
+            resultat = false;
+        }
+
+        return u;
+    }
+
+    public boolean verifAccount(String identifiant, String pwd) throws Exception
+    {
         String req = "SELECT password FROM users WHERE mail = '" + identifiant + "' OR nickname = '" + identifiant + "'";
         String res = s.requete(req);
 
@@ -180,7 +187,6 @@ public class Form
         {
             throw new Exception("La vérification à échouée");
         }
-
     }
 
     public void nicknameExists(String pseudo) throws Exception
@@ -259,6 +265,36 @@ public class Form
 
 
     // GETTERS AND SETTERS
+    public Connexion getC()
+    {
+        return c;
+    }
+
+    public void setC(Connexion c)
+    {
+        this.c = c;
+    }
+
+    public DbServer getS()
+    {
+        return s;
+    }
+
+    public void setS(DbServer s)
+    {
+        this.s = s;
+    }
+
+    public String getcPwdConfirm()
+    {
+        return cPwdConfirm;
+    }
+
+    public void setcPwdConfirm(String cPwdConfirm)
+    {
+        this.cPwdConfirm = cPwdConfirm;
+    }
+
     public int getcId()
     {
         return cId;

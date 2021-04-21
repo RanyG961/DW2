@@ -28,9 +28,9 @@ public class FormAdmin extends Form
     }
 
     @Override
-    public boolean verifAccount(HttpServletRequest request) throws Exception
+    public User connexion(HttpServletRequest req) throws Exception
     {
-        return super.verifAccount(request);
+        return super.connexion(req);
     }
 
     /**
@@ -52,18 +52,15 @@ public class FormAdmin extends Form
         String res = f.getS().requete(req);
 
        if(Integer.parseInt(res) == 0)
-       {
            return false;
-       }
        return true;
     }
 
-    public void createTable(HttpServletRequest req) throws IOException
+    public void createTable(HttpServletRequest req)
     {
         Path path = Paths.get(req.getServletContext().getRealPath("bdd/bdd_init.sql"));
         try {
             String content = Files.readString(path);
-//            System.out.println(content);
             f.getS().requete(content);
         }catch (IOException | SQLException e){
             e.printStackTrace();

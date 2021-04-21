@@ -1,5 +1,6 @@
 package dw2.projetweb.servlets;
 
+import dw2.projetweb.beans.User;
 import dw2.projetweb.forms.FormAdmin;
 
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/Admin_connexion")
@@ -26,21 +28,31 @@ public class Admin_connexion extends HttpServlet
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        User u = new User();
+
         try
         {
-            if(formIA.verifAccount(req))
-            {
-                this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
-            }
-            else
-            {
-                this.getServletContext().getRequestDispatcher("/WEB-INF/Admin/admin_connexion.jsp").forward(req, resp);
-            }
-        } catch (Exception throwables)
+            u = formIA.connexion(req);
+        } catch (Exception e)
         {
-            throwables.printStackTrace();
+            e.printStackTrace();
+        }
+
+        req.setAttribute("formIA", formIA);
+        req.setAttribute("User", u);
+
+        HttpSession session = req.getSession();
+
+        if (formIA.getErreurs().isEmpty())
+        {
+            session.setAttribute("sessionU", u);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+        } else
+        {
+            session.setAttribute("sessionU", null);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/Admin/admin_connexion.jsp").forward(req, resp);
         }
     }
 }

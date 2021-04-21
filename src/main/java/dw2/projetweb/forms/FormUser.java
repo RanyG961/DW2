@@ -15,8 +15,8 @@ public class FormUser extends Form
     }
 
     @Override
-    public boolean verifAccount(HttpServletRequest request) throws Exception
+    public User connexion(HttpServletRequest req) throws Exception
     {
-        return super.verifAccount(request);
+        return super.connexion(req);
     }
 }

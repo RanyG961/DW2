@@ -125,7 +125,7 @@ public class User
     }
 
     /**
-     * SEt le mail
+     * Set le mail
      * @param mail
      */
     public void setMail(String mail)
