@@ -8,9 +8,9 @@
 
     <!-- Header/Menu -->
     <header class="bg-white w-9/12 h-1/10 m-8 rounded-lg">
-        <%@ include file="header.jsp" %>
+        <%@ include file="../header.jsp" %>
     </header>
-
+    <a href="Admin_connexion">dsfsdfs</a>
     <!-- Connexion -->
     <div class="bg-blue w-2/12  h-1/6 rounded-lg">
         <p>Connexion</p>
@@ -18,23 +18,23 @@
 
     <!-- Editeur de texte -->
     <div class="bg-pink-200 w-9/12 h-4/5 mx-8 rounded-lg">
-        <%@ include file="editeur.jsp" %>
+        <%@ include file="../editeur.jsp" %>
     </div>
 
     <div class=" w-2/12 h5/6 rounded-lg">
         <!-- Messagerie -->
         <div class="bg-purple-300 w-full  h-5/6 rounded-lg">
-            <%@ include file="messagerie.jsp" %>
+            <%@ include file="../messagerie.jsp" %>
         </div>
         <!-- Social -->
         <div class=" bg-yellow-200 w-full h-1/6 rounded-lg ">
-            <%@ include file="social.jsp" %>
+            <%@ include file="../social.jsp" %>
         </div>
     </div>
 
 
     <footer class="bg-blue-500 items-end w-full h-1/8 m-8">
-        <%@ include file="footer.jsp" %>
+        <%@ include file="../footer.jsp" %>
     </footer>
 
 </body>
