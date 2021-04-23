@@ -25,13 +25,12 @@
 </div>
 
 <c:if test="${sessionScope.sessionU.mail ne null}">
-    <p> Wesh le S ${sessionScope.sessionU.mail} </p>
-
+    <p> User : ${sessionScope.sessionU.mail} connecté </p>
     <p><a href="Deconnexion">Deconnexion</a></p>
 </c:if>
 
 <c:if test="${sessionScope.sessionU.pseudo ne null}">
-    <p> User : ${sessionScope.sessionU.pseudo} connecter </p>
+    <p> User : ${sessionScope.sessionU.pseudo} connecté </p>
 
     <p><a href="Deconnexion"> Deconnexion</a></p>
 </c:if>

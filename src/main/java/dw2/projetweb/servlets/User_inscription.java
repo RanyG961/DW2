@@ -3,11 +3,13 @@ package dw2.projetweb.servlets;
 import dw2.projetweb.beans.User;
 import dw2.projetweb.forms.FormUser;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -31,6 +33,7 @@ public class User_inscription extends HttpServlet
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         User u = new User();
+        HttpSession session = req.getSession();
 
         try
         {
@@ -45,7 +48,8 @@ public class User_inscription extends HttpServlet
 
         if(formU.getErreurs().isEmpty())
         {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+            session.setAttribute("sessionU", u);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/espaceUtilisateur.jsp").forward(req, resp);
         }
         else
         {

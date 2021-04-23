@@ -48,7 +48,7 @@ public class Admin_connexion extends HttpServlet
         if (formIA.getErreurs().isEmpty())
         {
             session.setAttribute("sessionU", u);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
         } else
         {
             session.setAttribute("sessionU", null);

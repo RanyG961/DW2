@@ -8,16 +8,16 @@
 <html>
 <head>
     <title>Connexion</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
 </head>
 <body>
 <div class="formulaire">
     <h2 class="titre"> Connexion </h2>
     <form id="formConnexion" class="form-margin-top" action="Admin_connexion" method="POST">
         <div class="form-width">
-            <input type="text" placeholder="Identifiant" id="identifiant" name="identifiant" class="saisie" required />
+            <input type="text" placeholder="Identifiant" id="identifiant" name="identifiant" class="saisie" required/>
             <span> ${requestScope.formIA.erreurs['identifiant']}</span>
-            <input type="password" id="pwd" name="pwd" placeholder="Mot de passe" class="saisie" required />
+            <input type="password" id="pwd" name="pwd" placeholder="Mot de passe" class="saisie" required/>
             <span> ${requestScope.formIA.erreurs['pwd']}</span>
             <input type="submit" value="Connexion" class="bouton"/>
         </div>

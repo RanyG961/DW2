@@ -67,7 +67,7 @@ public class Admin_inscription extends HttpServlet
 
         if(formIA.getErreurs().isEmpty())
         {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/espaceAdmin.jsp").forward(req, resp);
         }
         else
         {

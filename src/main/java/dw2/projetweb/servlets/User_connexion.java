@@ -47,7 +47,7 @@ public class User_connexion extends HttpServlet
         if (formU.getErreurs().isEmpty())
         {
             session.setAttribute("sessionU", u);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/espaceUtilisateur.jsp").forward(req, resp);
         } else
         {
             this.getServletContext().getRequestDispatcher("/WEB-INF/Site/user_connexion.jsp").forward(req, resp);
