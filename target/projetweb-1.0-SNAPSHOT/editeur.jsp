@@ -88,6 +88,7 @@
 <script src="lib/quill.min.js"></script>
 
 <script>
+    const ws = new WebSocket("ws://localhost:8080/projetweb_war_exploded/changement")
     const quill = new Quill('#editor-container', {
         modules: {
             formula: true,
@@ -97,6 +98,28 @@
         placeholder: 'Compose an epic...',
         theme: 'snow'
     });
+
+    ws.onopen = event => {
+
+    };
+
+    ws.onclose = event => {
+    };
+
+    quill.on("text-change", (delta, oldDelta, source) => {
+        let opsJSON = JSON.stringify(delta.ops)
+        ws.send(opsJSON)
+    })
+
+    ws.onmessage = event => {
+        let data = event.data;
+        let pData = JSON.parse(data)
+        let id = pData.id
+        let msg = JSON.parse(pData.message)
+
+        console.log("Id : " + id + "message : " + msg)
+        console.log(pData)
+    }
 </script>
 
 </body>
