@@ -28,12 +28,45 @@ CREATE TABLE document (
     path varchar(200) NOT NULL,
     user_id BIGINT UNSIGNED REFERENCES user(id),
     dateCreation DATETIME,
-    dateUpdate DATETIME
+    dateUpdate DATETIME,
+    is_public BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE accessDocument (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     document_id BIGINT UNSIGNED REFERENCES document(id),
     user_id BIGINT UNSIGNED REFERENCES user(id),
+    droitLecture BOOLEAN NOT NULL DEFAULT FALSE,
+    droitEcriture BOOLEAN NOT NULL DEFAULT FALSE,
     droitAccees DATE
-)
+);
+
+CREATE TABLE groupe (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    createur_id BIGINT UNSIGNED REFERENCES user(id),
+    nom VARCHAR(50) NOT NULL,
+    dateCreation DATE
+);
+
+CREATE TABLE membre (
+    user_id BIGINT UNSIGNED REFERENCES user(id),
+    groupe_id BIGINT UNSIGNED REFERENCES groupe(id),
+    aRejoint DATETIME
+);
+
+CREATE TABLE conv (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user1_id BIGINT UNSIGNED REFERENCES user(id),
+    user2_id BIGINT UNSIGNED REFERENCES user(id),
+    pathConv varchar(200) NOT NULL,
+    dateConv DATETIME
+);
+
+CREATE TABLE msg (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_conv BIGINT UNSIGNED REFERENCES conv(id),
+    user1_id BIGINT UNSIGNED REFERENCES user(id),
+    user2_id BIGINT UNSIGNED REFERENCES user(id),
+    message TEXT,
+    dateMsg DATETIME
+);
