@@ -34,13 +34,15 @@ public class ServeurWebSocket
     {
         for (Session client : arrSessions)
         {
-            JSONObject json = new JSONObject();
+//            JSONObject json = new JSONObject();
 
-            System.out.println(sender);
-
-            json.put("id", sender.getId());
-            json.put("message", msg);
-            client.getBasicRemote().sendText(json.toString());
+//            System.out.println(sender);
+//
+//            json.put("id", sender.getId());
+//            json.put("message", msg);
+//            client.getBasicRemote().sendText(json.toString());
+//            System.out.println(msg);
+            client.getBasicRemote().sendText(msg);
         }
     }
 }

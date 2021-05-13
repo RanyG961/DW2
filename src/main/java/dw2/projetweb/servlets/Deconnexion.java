@@ -22,7 +22,7 @@ public class Deconnexion extends HttpServlet
         HttpSession session = req.getSession();
 
         session.invalidate();
-
+//        System.out.println(req.getContextPath());
         resp.sendRedirect(req.getContextPath() + "/index.jsp");
     }
 }

@@ -45,6 +45,11 @@ public class FormAdmin extends Form
        return !admin.isEmpty();
     }
 
+    /**
+     * Vérifie si les tables existent ou non
+     * @return true si elles existent pas
+     * @throws SQLException
+     */
     public boolean tableExists() throws SQLException
     {
         String nomBDD = f.getC().getJDBC_DBNAME();
@@ -56,6 +61,10 @@ public class FormAdmin extends Form
        return true;
     }
 
+    /**
+     * Crée les tables de la bdd
+     * @param req
+     */
     public void createTable(HttpServletRequest req)
     {
         Path path = Paths.get(req.getServletContext().getRealPath("bdd/bdd_init.sql"));

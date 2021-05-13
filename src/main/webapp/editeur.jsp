@@ -88,7 +88,15 @@
 <script src="lib/quill.min.js"></script>
 
 <script>
-    const ws = new WebSocket("ws://localhost:8080/projetweb_war_exploded/changement")
+    // https://webdevdesigner.com/q/create-guid-uuid-in-javascript-66424/
+    const uuidv4 = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+    let id;
+    const ws = new WebSocket("ws://176.190.63.49:8080/projetweb_war_exploded/changement")
     const quill = new Quill('#editor-container', {
         modules: {
             formula: true,
@@ -100,25 +108,45 @@
     });
 
     ws.onopen = event => {
-
+        id = uuidv4();
+        // console.log(id)
     };
 
     ws.onclose = event => {
     };
 
     quill.on("text-change", (delta, oldDelta, source) => {
-        let opsJSON = JSON.stringify(delta.ops)
-        ws.send(opsJSON)
+        if(source === "user")
+        {
+            let aEnvoyer = {
+                userId: id,
+                delta: delta.ops
+            }
+            // let opsJSON = JSON.stringify(delta.ops)
+            aEnvoyer = JSON.stringify(aEnvoyer)
+            // console.table(aEnvoyer)
+            ws.send(aEnvoyer)
+        }
     })
 
     ws.onmessage = event => {
         let data = event.data;
         let pData = JSON.parse(data)
-        let id = pData.id
-        let msg = JSON.parse(pData.message)
+        // console.table(pData)
 
-        console.log("Id : " + id + "message : " + msg)
-        console.log(pData)
+        let idMsg = pData.userId
+        console.log(idMsg)
+        let msg = pData.delta
+
+        console.table(msg)
+
+        if(id !== idMsg)
+        {
+            quill.updateContents(msg)
+        }
+        // console.log("Id : " + id + "message : " + msg)
+        // console.log(pData)
+        // quill.updateContents(data)
     }
 </script>
 

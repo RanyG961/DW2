@@ -119,9 +119,9 @@ public class Form
         else
         {
 
-           req = "INSERT INTO users(first_name, last_name, birthdate, password, nickname, mail, is_admin) VALUES('" + prenom + "', '" + nom + "', '" + dateNaiss + "', '" + pwd  + "', '" + nickname + "', '" + email + "'," + admin + ");";
+           req = "INSERT INTO users(first_name, last_name, birthdate, password, nickname, mail, is_admin) VALUES('" + prenom + "', '" + nom + "', '" + dateNaiss + "', '" + pwd  + "', '" + nickname + "', '" + email + "', " + admin + ");";
 
-//            System.out.println(req);
+            System.out.println(req);
             String res = s.requete(req);
 
             if(Integer.parseInt(res) != 1)
