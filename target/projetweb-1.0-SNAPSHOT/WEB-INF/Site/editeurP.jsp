@@ -23,8 +23,6 @@
 
             <p><a href="Deconnexion"> Deconnexion</a></p>
         </c:if>
-
-        ${requestScope.fichier.name}
     </div>
 
 <!-- Editeur de texte -->

@@ -110,7 +110,7 @@ public class FormFichier
         Integer id = null;
         try
         {
-            id = getSqlId(u.getMail());
+            id = getSqlId(u.getMail(), u.getPseudo());
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -185,9 +185,10 @@ public class FormFichier
         } else return Integer.parseInt(res) == 1;
     }
 
-    public Integer getSqlId(String email) throws Exception
+    public Integer getSqlId(String email, String nickname) throws Exception
     {
-        String req = "SELECT id FROM users WHERE mail = '" + email + "'";
+        String req = "SELECT id FROM users WHERE mail = '" + email + "' OR nickname = '" + nickname + "';";
+
         String res = form.getS().requete(req);
 
         res = res.substring(0, res.length() - 1);
@@ -196,6 +197,11 @@ public class FormFichier
 
         return id;
     }
+
+//    public Path getPathFichier(String nom) throws Exception
+//    {
+//        String req = "SELECT date";
+//    }
 
     /**
      * Vérifie le nom du fichier si il est valide ou non

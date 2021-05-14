@@ -54,7 +54,6 @@ public class User_inscription extends HttpServlet
         else
         {
             this.getServletContext().getRequestDispatcher("/WEB-INF/Site/user_inscription.jsp").forward(req, resp);
-
         }
 
     }

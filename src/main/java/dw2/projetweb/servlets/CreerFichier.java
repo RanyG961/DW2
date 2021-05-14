@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 @WebServlet("/CreerFichier")
 public class CreerFichier extends HttpServlet
@@ -30,7 +33,13 @@ public class CreerFichier extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
-        Path path = Paths.get(req.getServletContext().getRealPath("Documents"));
+        System.out.println(this.getClass().getClassLoader().getResource("").getPath().split("/WEB-INF/classes/")[0]);
+        System.out.println(getServletContext().getRealPath("/scripts"));
+
+
+
+        Path path = Paths.get(getServletContext().getRealPath("documents"));
+        System.out.println(path);
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("sessionU");
 
