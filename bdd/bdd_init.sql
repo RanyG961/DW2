@@ -25,7 +25,8 @@ CREATE TABLE friends (
 
 CREATE TABLE document (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    path varchar(200) NOT NULL,
+    nom varchar(255) NOT NULL,
+    path varchar(255) NOT NULL,
     user_id BIGINT UNSIGNED REFERENCES users(id),
     dateCreation DATETIME,
     dateUpdate DATETIME,

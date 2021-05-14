@@ -1,5 +1,6 @@
 package dw2.projetweb.beans;
 
+import java.nio.file.Path;
 import java.util.Date;
 
 /**
@@ -7,8 +8,9 @@ import java.util.Date;
  */
 public class Fichier
 {
-    private Long id;
-    private String path;
+    private Integer id;
+    private Path path;
+    private String name;
     private int proprietaire;
     private Date dateCreation;
     private Date dateUpdate;
@@ -24,22 +26,32 @@ public class Fichier
 
     /* -------------------------------------GETTERS AND SETTERS---------------------------------------------- */
 
-    public Long getId()
+    public Integer getId()
     {
         return id;
     }
 
-    public void setId(Long id)
+    public void setId(Integer id)
     {
         this.id = id;
     }
 
-    public String getPath()
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public Path getPath()
     {
         return path;
     }
 
-    public void setPath(String path)
+    public void setPath(Path path)
     {
         this.path = path;
     }

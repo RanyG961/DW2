@@ -74,14 +74,13 @@ public class Form
         }
         u.setPseudo(nickname);
 
-        if(erreurs.isEmpty())
+        if (erreurs.isEmpty())
         {
             resultat = true;
             try
             {
                 createAccount(nom, prenom, dateNaiss, email, pwd, pwdConfirm, nickname, admin);
-            }
-            catch (Exception e)
+            } catch (Exception e)
             {
                 setErreur(cNom, e.getMessage());
             }
@@ -89,8 +88,7 @@ public class Form
             u.setPrenom(prenom);
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dateNaiss);
             u.setDateNaissance(date);
-        }
-        else
+        } else
         {
             resultat = false;
             System.out.println("Resultat false");
@@ -112,23 +110,21 @@ public class Form
         pwdConfirm = escapeHtml4(pwdConfirm);
         nickname = escapeHtml4(nickname);
 
-        if(nom.isEmpty() || prenom.isEmpty() || dateNaiss.isEmpty() || email.isEmpty() || pwd.isEmpty() || pwdConfirm.isEmpty() || nickname.isEmpty())
+        if (nom.isEmpty() || prenom.isEmpty() || dateNaiss.isEmpty() || email.isEmpty() || pwd.isEmpty() || pwdConfirm.isEmpty() || nickname.isEmpty())
         {
             throw new Exception("Veuillez remplir toutes les cases");
-        }
-        else
+        } else
         {
 
-           req = "INSERT INTO users(first_name, last_name, birthdate, password, nickname, mail, is_admin) VALUES('" + prenom + "', '" + nom + "', '" + dateNaiss + "', '" + pwd  + "', '" + nickname + "', '" + email + "', " + admin + ");";
+            req = "INSERT INTO users(first_name, last_name, birthdate, password, nickname, mail, is_admin) VALUES('" + prenom + "', '" + nom + "', '" + dateNaiss + "', '" + pwd + "', '" + nickname + "', '" + email + "', " + admin + ");";
 
             System.out.println(req);
             String res = s.requete(req);
 
-            if(Integer.parseInt(res) != 1)
+            if (Integer.parseInt(res) != 1)
             {
                 throw new Exception("L'insertion a échouée");
-            }
-            else return Integer.parseInt(res) == 1;
+            } else return Integer.parseInt(res) == 1;
 //            System.out.println("Ca a marché");
         }
     }
@@ -143,28 +139,24 @@ public class Form
         try
         {
             verifAccount(identifiant, pwd);
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             setErreur(cIdentifiant, e.getMessage());
             setErreur(cPassword, e.getMessage());
         }
 
 
-
-        if(erreurs.isEmpty())
+        if (erreurs.isEmpty())
         {
-            if(identifiant.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)"))
+            if (identifiant.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)"))
             {
                 u.setMail(identifiant);
-            }
-            else
+            } else
             {
                 u.setPseudo(identifiant);
             }
             resultat = true;
-        }
-        else
+        } else
         {
             resultat = false;
         }
@@ -179,11 +171,10 @@ public class Form
 
         res = StringUtils.chop(res);
 
-        if(BCrypt.checkpw(pwd, res))
+        if (BCrypt.checkpw(pwd, res))
         {
             return true;
-        }
-        else
+        } else
         {
             throw new Exception("La vérification à échouée");
         }
@@ -191,15 +182,14 @@ public class Form
 
     public void nicknameExists(String pseudo) throws Exception
     {
-        String req = "SELECT id FROM users WHERE nickname = '" + pseudo +"'";
+        String req = "SELECT id FROM users WHERE nickname = '" + pseudo + "'";
 //        System.out.println(req);
         String res = s.requete(req);
 
-        if(!res.isEmpty())
+        if (!res.isEmpty())
         {
             throw new Exception("Votre pseudo existe déjà, veuillez saisir un pseudo valide.");
-        }
-        else if(!pseudo.matches("(^[a-zA-Z0-9_]+$)"))
+        } else if (!pseudo.matches("(^[a-zA-Z0-9_]+$)"))
         {
             throw new Exception("Pseudo non valide, veuillez saisir un pseudo valide.");
         }
@@ -211,11 +201,10 @@ public class Form
 //        System.out.println(req);
         String res = s.requete(req);
 
-        if(!res.isEmpty())
+        if (!res.isEmpty())
         {
             throw new Exception("Votre adresse mail existe déjà, veuillez saisir une adresse mail valide.");
-        }
-        else if(!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)"))
+        } else if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)"))
         {
             throw new Exception("Adresse mail non valide, veuillez saisir une adresse mail valide.");
         }
@@ -223,19 +212,16 @@ public class Form
 
     public void passwordExists(String password, String pwdConfirm) throws Exception
     {
-        if(!password.equals(pwdConfirm))
+        if (!password.equals(pwdConfirm))
         {
             throw new Exception("Problème dans la confirmation du mot de passe");
-        }
-        else if(password.isEmpty())
+        } else if (password.isEmpty())
         {
             throw new Exception("Veuillez saisir un mot de passe");
-        }
-        else if(pwdConfirm.isEmpty())
+        } else if (pwdConfirm.isEmpty())
         {
             throw new Exception("Veuillez saisir votre confirmation de mot de passe");
-        }
-        else if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#&()–{}:;',?/*~$^+=<>]).{6,20}$"))
+        } else if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#&()–{}:;',?/*~$^+=<>]).{6,20}$"))
         {
             throw new Exception("Problème lors de la saisie du mot de passe(Au moins une lettre minuscule, majuscule, chiffre et symbole");
         }
@@ -245,8 +231,9 @@ public class Form
      * Ajoute un message correspondant au champ spécifié à la map des erreurs.
      * Credit : OpenClassrooms
      */
-    private void setErreur( String champ, String message ) {
-        erreurs.put( champ, message );
+    public void setErreur(String champ, String message)
+    {
+        erreurs.put(champ, message);
     }
 
     /*
@@ -254,11 +241,14 @@ public class Form
      * sinon.
      * Credit : OpenClassrooms
      */
-    private static String getValeurChamp(HttpServletRequest request, String nomChamp ) {
-        String valeur = request.getParameter( nomChamp );
-        if ( valeur == null || valeur.trim().length() == 0 ) {
+    public static String getValeurChamp(HttpServletRequest request, String nomChamp)
+    {
+        String valeur = request.getParameter(nomChamp);
+        if (valeur == null || valeur.trim().length() == 0)
+        {
             return null;
-        } else {
+        } else
+        {
             return valeur.trim();
         }
     }

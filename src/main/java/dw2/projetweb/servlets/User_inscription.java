@@ -49,7 +49,7 @@ public class User_inscription extends HttpServlet
         if(formU.getErreurs().isEmpty())
         {
             session.setAttribute("sessionU", u);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/espaceUtilisateur.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/Site/espaceUtilisateur.jsp").forward(req, resp);
         }
         else
         {
