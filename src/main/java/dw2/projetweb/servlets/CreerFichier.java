@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 public class CreerFichier extends HttpServlet
 {
     public static final String VUE = "/WEB-INF/Site/espaceUtilisateur.jsp";
-    public static final String VUE2 = "/espaceUtilisateur.jsp";
+    public static final String VUE2 = "/WEB-INF/Site/editeurP.jsp";
 
 
     @Override

@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 @MultipartConfig(maxFileSize = 10485760, maxRequestSize = 52428800,fileSizeThreshold = 1048576)
 public class FichierUpload extends HttpServlet
 {
-    public static final String VUE = "/WEB-INF/Site/espaceUtilisateur.jsp";
+    public static final String VUE = "/WEB-INF/Site/editeurP.jsp";
     public static final String CHEMIN = "chemin";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
