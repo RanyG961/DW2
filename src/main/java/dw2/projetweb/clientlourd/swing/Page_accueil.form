@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="dw2.projetweb.clientlourd.swing.Page_accueil">
+  <grid id="27dc6" binding="page_accueil" layout-manager="BorderLayout" hgap="-1" vgap="-1">
+    <constraints>
+      <xy x="14" y="20" width="506" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="90397" binding="editeur" layout-manager="BorderLayout" hgap="-1" vgap="-1">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none" title=""/>
+        <children>
+          <component id="53c8c" class="javax.swing.JLabel" binding="txt_editeur">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <text value="Editeur"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="b8e25" binding="header" layout-manager="BorderLayout" hgap="5" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="4da90" binding="connexion" layout-manager="BorderLayout" hgap="-1" vgap="5">
+            <constraints border-constraint="East"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="ab504" class="javax.swing.JButton" binding="Connexion">
+                <constraints border-constraint="North"/>
+                <properties>
+                  <text value="Connexion"/>
+                </properties>
+              </component>
+              <component id="c3ed9" class="javax.swing.JButton" binding="Inscription">
+                <constraints border-constraint="South"/>
+                <properties>
+                  <text value="Inscription"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <scrollpane id="49ed4" binding="Menu">
+            <constraints border-constraint="West"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="c2264" class="javax.swing.JButton" binding="menuButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Menu"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+          <grid id="cfec2" binding="creer_projet" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints border-constraint="Center"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="ca233" class="javax.swing.JButton" binding="btn_creer_projet">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <horizontalAlignment value="0"/>
+                  <text value="Créer un projet"/>
+                </properties>
+              </component>
+              <component id="31ae7" class="javax.swing.JButton" binding="ouvrirUnProjetButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Ouvrir un projet"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="53aa0" binding="messagerie" layout-manager="BorderLayout" hgap="-1" vgap="-1">
+        <constraints border-constraint="East"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="77d5d" binding="social" layout-manager="BorderLayout" hgap="-1" vgap="-1">
+            <constraints border-constraint="South"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="3df87" class="javax.swing.JLabel">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <text value="Social"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="cb8a0" class="javax.swing.JLabel">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <enabled value="true"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <text value="Messagerie"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
