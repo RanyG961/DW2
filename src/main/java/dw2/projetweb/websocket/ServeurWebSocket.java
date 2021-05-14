@@ -1,16 +1,20 @@
 package dw2.projetweb.websocket;
 
+import dw2.projetweb.beans.User;
 import org.json.JSONObject;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @ServerEndpoint(value = "/changement")
 public class ServeurWebSocket
 {
     static ArrayList<Session> arrSessions = new ArrayList<>();
+    static HashMap<User, JSONObject> mapMsg = new HashMap<>();
 
     @OnOpen public void open(Session session)
     {
