@@ -33,12 +33,7 @@ public class CreerFichier extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
-        System.out.println(this.getClass().getClassLoader().getResource("").getPath().split("/WEB-INF/classes/")[0]);
-        System.out.println(getServletContext().getRealPath("/scripts"));
-
-
-
-        Path path = Paths.get(getServletContext().getRealPath("documents"));
+        Path path = Paths.get(getServletContext().getRealPath("/WEB-INF/documents"));
         System.out.println(path);
         HttpSession session = req.getSession();
         User u = (User) session.getAttribute("sessionU");

@@ -22,7 +22,8 @@ import java.util.Map;
 @ServerEndpoint(value = "/changement/{user}/{fichier}")
 public class ServeurWebSocket
 {
-    private final Path pathFichier = Path.of("/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/documents");
+//    private final Path pathFichier = Path.of("/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents");
+    private final Path pathFichier = Path.of(this.getClass().getClassLoader().getResource("").getPath().split("/classes/")[0]+"/documents/");
     static ArrayList<Session> arrSessions = new ArrayList<>();
     static HashMap<String, JSONArray> mapMsg = new HashMap<>();
 
@@ -56,21 +57,44 @@ public class ServeurWebSocket
         for (Session client : arrSessions)
         {
             JSONObject obj = new JSONObject(msg);
-            System.out.println(obj);
-
-//            String userId = obj.getString("user");
             JSONArray texte = (JSONArray) obj.get("delta");
 
+            JSONObject test = new JSONObject();
             String aEnvoyer = texte.toString();
-            aEnvoyer = aEnvoyer.substring(1, aEnvoyer.length() - 1);
+
             System.out.println(aEnvoyer);
 
+//            if(texte.length() == 1)
+//            {
+//                test = texte.getJSONObject(0);
+//                aEnvoyer = test.toString();
+//            }
+            if(texte.length() == 2)
+            {
+                test = texte.getJSONObject(1);
+                System.out.println("Test " + test);
+                aEnvoyer = test.toString();
+            }
+            else
+            {
+                aEnvoyer = aEnvoyer.substring(1, aEnvoyer.length() - 1);
+            }
+//            else
+//            {
+//                aEnvoyer = texte.toString().substring(1, aEnvoyer.length() - 1);
+//            }
+
+//            System.out.println("Test : " + test);
+//            System.out.println("Texte : " + texte);
+//            System.out.println("A envoyer : " + aEnvoyer);
 
 
-            if(client.getPathParameters().containsValue(fichier))
+
+            System.out.println(aEnvoyer);
+            if (client.getPathParameters().containsValue(fichier))
             {
                 FileWriter ecrit = new FileWriter(pathFichier + "/" + fichier, true);
-                ecrit.write( aEnvoyer + ",");
+                ecrit.write(aEnvoyer + ",");
                 ecrit.flush();
                 ecrit.close();
                 client.getBasicRemote().sendText(msg);

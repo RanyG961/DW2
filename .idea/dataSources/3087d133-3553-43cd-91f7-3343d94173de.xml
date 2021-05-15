@@ -1161,7 +1161,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
     <user id="335" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="336" parent="3" name="accessDocument"/>
+    <table id="336" parent="3" name="acceesDocument"/>
     <table id="337" parent="3" name="conv"/>
     <table id="338" parent="3" name="document"/>
     <table id="339" parent="3" name="friends"/>
@@ -1195,9 +1195,9 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="349" parent="336" name="droitAccees">
+    <column id="349" parent="336" name="dateAccees">
       <Position>6</Position>
-      <DataType>date|0s</DataType>
+      <DataType>datetime|0s</DataType>
     </column>
     <index id="350" parent="336" name="document_id">
       <ColNames>document_id</ColNames>
@@ -1212,12 +1212,12 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="353" parent="336" name="accessDocument_ibfk_1">
+    <foreign-key id="353" parent="336" name="acceesDocument_ibfk_1">
       <ColNames>document_id</ColNames>
       <RefTableName>document</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="354" parent="336" name="accessDocument_ibfk_2">
+    <foreign-key id="354" parent="336" name="acceesDocument_ibfk_2">
       <ColNames>user_id</ColNames>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
@@ -1330,9 +1330,11 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <Position>3</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
     </column>
-    <column id="378" parent="339" name="statusDemande">
+    <column id="378" parent="339" name="demandeAcceptee">
       <Position>4</Position>
-      <DataType>smallint(6)|0s</DataType>
+      <DataType>tinyint(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="379" parent="339" name="demandeCreer">
       <Position>5</Position>

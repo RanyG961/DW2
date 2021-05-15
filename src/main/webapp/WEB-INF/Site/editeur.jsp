@@ -86,11 +86,16 @@
     </div>
 </div>
 
-<script type="text/javascript" src="scripts/editeur.js"></script>
+<script type="text/javascript" src="JS/editeur.js"></script>
 <script type="text/javascript">
     const pathFichier = '${requestScope.fichier.path}'
     const nomFichier = '${requestScope.fichier.name}'
     const Fichier = pathFichier + "/" + nomFichier
+    const contenuFichier = [${requestScope.contenuFichier}];
+
+    quill.setContents(contenuFichier)
+
+    console.log(contenuFichier)
 
     let id;
     <c:if test="${sessionScope.sessionU.mail ne null}">
@@ -106,7 +111,6 @@
 
     ws.onopen = event => {
         id = uuidv4();
-        // console.log(id)
     };
 
     ws.onclose = event => {
@@ -119,7 +123,8 @@
                 id: id,
                 delta: delta.ops
             }
-            // let opsJSON = JSON.stringify(delta.ops)
+            let opsJSON = JSON.stringify(delta.ops)
+            console.log(opsJSON)
             aEnvoyer = JSON.stringify(aEnvoyer)
             // console.table(aEnvoyer)
             ws.send(aEnvoyer)
@@ -141,10 +146,7 @@
         {
             quill.updateContents(msg)
         }
-        // let t = fetch(Fichier).then(response => response.text()).then(data  => console.log(data))
-        // console.log(t)
     }
-
 </script>
 
 </body>

@@ -18,7 +18,7 @@ CREATE TABLE friends (
                          id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                          user1_id BIGINT UNSIGNED REFERENCES users(id),
                          user2_id BIGINT UNSIGNED REFERENCES users(id),
-                         statusDemande SMALLINT,
+                         demandeAcceptee BOOLEAN NOT NULL DEFAULT FALSE,
                          demandeCreer DATE,
                          demandeUpdate DATE
 );
@@ -39,7 +39,7 @@ CREATE TABLE acceesDocument (
                                 user_id BIGINT UNSIGNED REFERENCES users(id),
                                 droitLecture BOOLEAN NOT NULL DEFAULT FALSE,
                                 droitEcriture BOOLEAN NOT NULL DEFAULT FALSE,
-                                droitAccees DATE
+                                dateAccees DATETIME
 );
 
 CREATE TABLE groupe (
