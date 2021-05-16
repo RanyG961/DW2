@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: hesscode
 -- ------------------------------------------------------
--- Server version	10.5.9-MariaDB
+-- Server version	10.5.10-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,7 +34,7 @@ CREATE TABLE `acceesDocument` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `acceesDocument_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `document` (`id`),
   CONSTRAINT `acceesDocument_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +43,7 @@ CREATE TABLE `acceesDocument` (
 
 LOCK TABLES `acceesDocument` WRITE;
 /*!40000 ALTER TABLE `acceesDocument` DISABLE KEYS */;
+INSERT INTO `acceesDocument` VALUES (1,113,1,1,1,'2021-05-15 13:29:50'),(2,114,1,1,1,'2021-05-15 13:46:20'),(3,115,2,1,1,'2021-05-15 18:50:33'),(7,113,3,1,1,'2021-05-16 14:41:02'),(8,116,1,1,1,'2021-05-16 17:34:51'),(9,117,1,1,1,'2021-05-16 19:47:35'),(10,117,2,1,1,'2021-05-16 19:47:35'),(11,117,3,1,1,'2021-05-16 19:47:35'),(12,117,4,1,1,'2021-05-16 19:47:35'),(13,117,5,1,1,'2021-05-16 19:47:35'),(14,117,6,1,1,'2021-05-16 19:47:35');
 /*!40000 ALTER TABLE `acceesDocument` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +95,7 @@ CREATE TABLE `document` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `document_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +104,7 @@ CREATE TABLE `document` (
 
 LOCK TABLES `document` WRITE;
 /*!40000 ALTER TABLE `document` DISABLE KEYS */;
-INSERT INTO `document` VALUES (109,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_12:31:52.txt',1,'2021-05-15 12:31:52',NULL,0,'1_15-05-2021_12:31:52.txt'),(110,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_12:35:00.txt',1,'2021-05-15 12:35:00',NULL,0,'1_15-05-2021_12:35:00.txt'),(111,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_12:35:41.txt',1,'2021-05-15 12:35:41',NULL,0,'1_15-05-2021_12:35:41.txt'),(112,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_12:41:30.txt',1,'2021-05-15 12:41:30',NULL,0,'1_15-05-2021_12:41:30.txt');
+INSERT INTO `document` VALUES (109,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_12:31:52.txt',1,'2021-05-15 12:31:52',NULL,1,'1_15-05-2021_12:31:52.txt'),(110,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_12:35:00.txt',1,'2021-05-15 12:35:00',NULL,0,'1_15-05-2021_12:35:00.txt'),(111,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_12:35:41.txt',1,'2021-05-15 12:35:41',NULL,0,'1_15-05-2021_12:35:41.txt'),(112,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_12:41:30.txt',1,'2021-05-15 12:41:30',NULL,0,'1_15-05-2021_12:41:30.txt'),(113,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_13:29:50.txt',1,'2021-05-15 13:29:50',NULL,0,'1_15-05-2021_13:29:50.txt'),(114,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_15-05-2021_13:46:20.txt',1,'2021-05-15 13:46:20',NULL,0,'1_15-05-2021_13:46:20.txt'),(115,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/2_15-05-2021_18:50:33.txt',2,'2021-05-15 18:50:33',NULL,0,'2_15-05-2021_18:50:33.txt'),(116,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_16-05-2021_17:34:51.txt',1,'2021-05-16 17:34:51',NULL,0,'1_16-05-2021_17:34:51.txt'),(117,'/home/ranyg961/MEGAsync/S6/DW2/hesscode/target/projetweb-1.0-SNAPSHOT/WEB-INF/documents/1_16-05-2021_19:47:35.txt',1,'2021-05-16 19:47:35',NULL,1,'1_16-05-2021_19:47:35.txt');
 /*!40000 ALTER TABLE `document` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +119,7 @@ CREATE TABLE `friends` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user1_id` bigint(20) unsigned DEFAULT NULL,
   `user2_id` bigint(20) unsigned DEFAULT NULL,
-  `statusDemande` smallint(6) DEFAULT NULL,
+  `demandeAcceptee` tinyint(1) NOT NULL DEFAULT 0,
   `demandeCreer` date DEFAULT NULL,
   `demandeUpdate` date DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -126,7 +127,7 @@ CREATE TABLE `friends` (
   KEY `user2_id` (`user2_id`),
   CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`user1_id`) REFERENCES `users` (`id`),
   CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`user2_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +136,7 @@ CREATE TABLE `friends` (
 
 LOCK TABLES `friends` WRITE;
 /*!40000 ALTER TABLE `friends` DISABLE KEYS */;
+INSERT INTO `friends` VALUES (3,1,2,1,'2021-05-15','2021-05-15'),(15,1,3,1,'2021-05-16','2021-05-16'),(28,1,5,0,'2021-05-16',NULL);
 /*!40000 ALTER TABLE `friends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +244,7 @@ CREATE TABLE `users` (
   `mail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +253,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Rany','Ghazzawi','1996-08-11','$2a$12$z/u6Z69wOe4gmPZX5ASKMucL452wqQ5GQDm4/kRonEd2FveATWtBy','RanyG961','ranywwe@hotmail.com',1),(2,'Mohammed-Bashir','Al Mahdi','1998-01-20','$2a$12$APGMj/csrnxLEDnQRVxIHuQ1TkgQDhPI633nw6x7NEcYXH3QmutP.','MoBash313','mohammedbashir.m@gmail.com',0);
+INSERT INTO `users` VALUES (1,'Rany','Ghazzawi','1996-08-11','$2a$12$z/u6Z69wOe4gmPZX5ASKMucL452wqQ5GQDm4/kRonEd2FveATWtBy','RanyG961','ranywwe@hotmail.com',1),(2,'Mohammed-Bashir','Al Mahdi','1998-01-20','$2a$12$APGMj/csrnxLEDnQRVxIHuQ1TkgQDhPI633nw6x7NEcYXH3QmutP.','MoBash313','mohammedbashir.m@gmail.com',0),(3,'Rany','Zeaiter','1996-08-11','$2a$12$SJqrIhkG8COsbB0CEkt8R.B4KBLXtNckHNcAES.zJ.s886QHud/3S','ranyg','ranyg@outlook.com',0),(4,'DuGhetto','Scarface','2022-01-01','$2a$12$CTdTsQYvKjvtiPdxeDwsv.7k/c7WQCVqbzbEDaQjZNopYjuS57CV.','BangBang','bangbang@bang.bang',0),(5,'Al','Interieur','2021-05-10','$2a$12$6tTJEVvZk08aZ7vJVtqBw.WDvv413vbbMslFxfOuNxOUFpdi0PKN6','alin','alint@hotmail.com',0),(6,'Biden','Joe','2021-05-07','$2a$12$5C4M4kTdq9zZoxuLhwRv1eWKIv2fILrdk8S00kfSA1x/OOOJO4/FO','JoeBiden','biden.joe@yopmail.com',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -264,4 +266,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-15 13:20:00
+-- Dump completed on 2021-05-16 21:05:40
