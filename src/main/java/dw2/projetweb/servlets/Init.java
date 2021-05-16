@@ -7,28 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * <b>Init est la servlet qui s'occupe de la gestion de la page d'accueil du site.</b>
- * <p>
- * 		Sur la page d'accueil,on peut :
- * <ul>
- * 		<li>Un monstre.</li>
- * 		<li>Une héro.</li>
- * </ul>
- *
- * @see Admin_connexion
- * @see Admin_inscription
- * @see User_connexion
- * @see User_inscription
- *
- */
-
 @WebServlet("/Init")
 public class Init extends HttpServlet
 {
-    /**
-     *
-     */
     public Init()
     {
         super();

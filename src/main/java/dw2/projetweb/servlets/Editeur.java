@@ -20,9 +20,6 @@ public class Editeur extends HttpServlet
         super.init();
     }
 
-    /**
-     *
-     */
     public Editeur()
     {
         super();

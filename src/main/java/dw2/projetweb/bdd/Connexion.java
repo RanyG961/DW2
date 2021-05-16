@@ -19,9 +19,6 @@ public class Connexion
 
     private int res;
 
-    /**
-     *
-     */
     public Connexion()
     {
         try
@@ -58,9 +55,6 @@ public class Connexion
         }
     }
 
-    /**
-     *
-     */
     public void deconnexion()
     {
         try
@@ -103,6 +97,10 @@ public class Connexion
         return cxn;
     }
 
+    /**
+     *
+     * @param cxn
+     */
     public void setCxn(Connection cxn)
     {
         this.cxn = cxn;
@@ -113,6 +111,10 @@ public class Connexion
         return stmt;
     }
 
+    /**
+     *
+     * @param stmt
+     */
     public void setStmt(Statement stmt)
     {
         this.stmt = stmt;
@@ -123,6 +125,10 @@ public class Connexion
         return pr_stmt;
     }
 
+    /**
+     *
+     * @param pr_stmt
+     */
     public void setPr_stmt(PreparedStatement pr_stmt)
     {
         this.pr_stmt = pr_stmt;
@@ -133,6 +139,10 @@ public class Connexion
         return rs;
     }
 
+    /**
+     *
+     * @param rs
+     */
     public void setRs(ResultSet rs)
     {
         this.rs = rs;
@@ -143,6 +153,10 @@ public class Connexion
         return rsmd;
     }
 
+    /**
+     *
+     * @param rsmd
+     */
     public void setRsmd(ResultSetMetaData rsmd)
     {
         this.rsmd = rsmd;
@@ -153,6 +167,10 @@ public class Connexion
         return res;
     }
 
+    /**
+     *
+     * @param res
+     */
     public void setRes(int res)
     {
         this.res = res;

@@ -87,6 +87,10 @@ public class DbServer
         return c;
     }
 
+    /**
+     *
+     * @param c
+     */
     public void setC(Connexion c)
     {
         this.c = c;
@@ -97,6 +101,10 @@ public class DbServer
         return stmt;
     }
 
+    /**
+     *
+     * @param stmt
+     */
     public void setStmt(Statement stmt)
     {
         this.stmt = stmt;
@@ -107,6 +115,10 @@ public class DbServer
         return pr_stmt;
     }
 
+    /**
+     *
+     * @param pr_stmt
+     */
     public void setPr_stmt(PreparedStatement pr_stmt)
     {
         this.pr_stmt = pr_stmt;
@@ -117,6 +129,10 @@ public class DbServer
         return rs;
     }
 
+    /**
+     *
+     * @param rs
+     */
     public void setRs(ResultSet rs)
     {
         this.rs = rs;
@@ -127,6 +143,10 @@ public class DbServer
         return rsmd;
     }
 
+    /**
+     *
+     * @param rsmd
+     */
     public void setRsmd(ResultSetMetaData rsmd)
     {
         this.rsmd = rsmd;
@@ -137,6 +157,10 @@ public class DbServer
         return res;
     }
 
+    /**
+     *
+     * @param res
+     */
     public void setRes(int res)
     {
         this.res = res;

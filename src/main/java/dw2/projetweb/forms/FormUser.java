@@ -7,9 +7,6 @@ import java.text.ParseException;
 
 public class FormUser extends Form
 {
-    /**
-     *
-     */
     private Form f = new Form();
 
     /**

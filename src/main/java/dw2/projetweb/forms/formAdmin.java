@@ -20,9 +20,6 @@ import java.util.Map;
 
 public class FormAdmin extends Form
 {
-    /**
-     *
-     */
     private Form f = new Form();
 
     /**
@@ -82,7 +79,8 @@ public class FormAdmin extends Form
      */
     public void createTable(HttpServletRequest req)
     {
-        Path path = Paths.get(req.getServletContext().getRealPath("bdd/bdd_init.sql"));
+//        Path path = Paths.get(req.getServletContext().getRealPath("bdd/bdd_init.sql"));
+        Path path = Paths.get(req.getServletContext().getRealPath("/WEB-INF/BDD/bdd_init.sql"));
         try {
             String content = Files.readString(path);
             f.getS().requete(content);

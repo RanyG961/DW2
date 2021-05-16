@@ -10,8 +10,8 @@
 <head>
     <meta charset="utf-8"/>
     <title>Hesscode</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="../CSS/index.css" rel="stylesheet">
+    <link href="CSS/tailwind.min.css" rel="stylesheet">
+    <link href="CSS/index.css" rel="stylesheet">
 </head>
 <body class="bg-blue-100 flex flex-col h-full">
 

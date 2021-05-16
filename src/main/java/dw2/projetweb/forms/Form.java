@@ -141,11 +141,16 @@ public class Form
             System.out.println(req);
             String res = s.requete(req);
 
+            System.out.println("Resultat : " + res);
+
             if (Integer.parseInt(res) != 1)
             {
                 throw new Exception("L'insertion a échouée");
-            } else return Integer.parseInt(res) == 1;
-//            System.out.println("Ca a marché");
+            } else
+            {
+                System.out.println("Ca a marché");
+                return Integer.parseInt(res) == 1;
+            }
         }
     }
 
@@ -322,6 +327,10 @@ public class Form
         return c;
     }
 
+    /**
+     *
+     * @param c
+     */
     public void setC(Connexion c)
     {
         this.c = c;
@@ -332,6 +341,10 @@ public class Form
         return s;
     }
 
+    /**
+     *
+     * @param s
+     */
     public void setS(DbServer s)
     {
         this.s = s;
@@ -342,6 +355,10 @@ public class Form
         return cPwdConfirm;
     }
 
+    /**
+     *
+     * @param cPwdConfirm
+     */
     public void setcPwdConfirm(String cPwdConfirm)
     {
         this.cPwdConfirm = cPwdConfirm;
@@ -352,6 +369,10 @@ public class Form
         return cId;
     }
 
+    /**
+     *
+     * @param cId
+     */
     public void setcId(int cId)
     {
         this.cId = cId;
@@ -362,6 +383,10 @@ public class Form
         return cNom;
     }
 
+    /**
+     *
+     * @param cNom
+     */
     public void setcNom(String cNom)
     {
         this.cNom = cNom;
@@ -372,6 +397,10 @@ public class Form
         return cPrenom;
     }
 
+    /**
+     *
+     * @param cPrenom
+     */
     public void setcPrenom(String cPrenom)
     {
         this.cPrenom = cPrenom;
@@ -382,6 +411,10 @@ public class Form
         return cDateNaissance;
     }
 
+    /**
+     *
+     * @param cDateNaissance
+     */
     public void setcDateNaissance(String cDateNaissance)
     {
         this.cDateNaissance = cDateNaissance;
@@ -392,6 +425,10 @@ public class Form
         return cPseudo;
     }
 
+    /**
+     *
+     * @param cPseudo
+     */
     public void setcPseudo(String cPseudo)
     {
         this.cPseudo = cPseudo;
@@ -402,6 +439,10 @@ public class Form
         return cPassword;
     }
 
+    /**
+     *
+     * @param cPassword
+     */
     public void setcPassword(String cPassword)
     {
         this.cPassword = cPassword;
@@ -412,6 +453,10 @@ public class Form
         return cMail;
     }
 
+    /**
+     *
+     * @param cMail
+     */
     public void setcMail(String cMail)
     {
         this.cMail = cMail;
@@ -422,6 +467,10 @@ public class Form
         return cAdmin;
     }
 
+    /**
+     *
+     * @param cAdmin
+     */
     public void setcAdmin(boolean cAdmin)
     {
         this.cAdmin = cAdmin;
@@ -432,6 +481,10 @@ public class Form
         return resultat;
     }
 
+    /**
+     *
+     * @param resultat
+     */
     public void setResultat(boolean resultat)
     {
         this.resultat = resultat;
@@ -442,6 +495,10 @@ public class Form
         return erreurs;
     }
 
+    /**
+     *
+     * @param erreurs
+     */
     public void setErreurs(Map<String, String> erreurs)
     {
         this.erreurs = erreurs;

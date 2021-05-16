@@ -31,6 +31,10 @@ public class Fichier
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Integer id)
     {
         this.id = id;
@@ -41,6 +45,10 @@ public class Fichier
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name)
     {
         this.name = name;
@@ -51,6 +59,10 @@ public class Fichier
         return path;
     }
 
+    /**
+     *
+     * @param path
+     */
     public void setPath(Path path)
     {
         this.path = path;
@@ -61,6 +73,10 @@ public class Fichier
         return proprietaire;
     }
 
+    /**
+     *
+     * @param proprietaire
+     */
     public void setProprietaire(int proprietaire)
     {
         this.proprietaire = proprietaire;
@@ -71,6 +87,10 @@ public class Fichier
         return dateCreation;
     }
 
+    /**
+     *
+     * @param dateCreation
+     */
     public void setDateCreation(Date dateCreation)
     {
         this.dateCreation = dateCreation;
@@ -81,6 +101,10 @@ public class Fichier
         return dateUpdate;
     }
 
+    /**
+     *
+     * @param dateUpdate
+     */
     public void setDateUpdate(Date dateUpdate)
     {
         this.dateUpdate = dateUpdate;
@@ -91,6 +115,10 @@ public class Fichier
         return isPublic;
     }
 
+    /**
+     *
+     * @param aPublic
+     */
     public void setPublic(boolean aPublic)
     {
         isPublic = aPublic;

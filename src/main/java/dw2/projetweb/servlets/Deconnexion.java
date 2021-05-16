@@ -11,9 +11,6 @@ import java.io.IOException;
 @WebServlet("/Deconnexion")
 public class Deconnexion extends HttpServlet
 {
-    /**
-     *
-     */
     public Deconnexion()
     {
         super();
@@ -33,6 +30,6 @@ public class Deconnexion extends HttpServlet
 
         session.invalidate();
 //        System.out.println(req.getContextPath());
-        resp.sendRedirect(req.getContextPath() + "/init.jsp");
+        resp.sendRedirect(req.getContextPath() + "/index.jsp");
     }
 }

@@ -9,7 +9,7 @@ CREATE TABLE users (
                        last_name VARCHAR(255) NOT NULL,
                        birthdate DATE NOT NULL,
                        password VARCHAR(50) NOT NULL,
-                       nickname VARCHAR(10) NOT NULL,
+                       nickname VARCHAR(20) NOT NULL,
                        mail VARCHAR(255) NOT NULL,
                        is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -18,7 +18,7 @@ CREATE TABLE friends (
                          id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                          user1_id BIGINT UNSIGNED REFERENCES users(id),
                          user2_id BIGINT UNSIGNED REFERENCES users(id),
-                         statusDemande SMALLINT,
+                         demandeAcceptee BOOLEAN NOT NULL DEFAULT FALSE,
                          demandeCreer DATE,
                          demandeUpdate DATE
 );
@@ -33,13 +33,13 @@ CREATE TABLE document (
                           is_public BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE accessDocument (
+CREATE TABLE acceesDocument (
                                 id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                                 document_id BIGINT UNSIGNED REFERENCES document(id),
                                 user_id BIGINT UNSIGNED REFERENCES users(id),
                                 droitLecture BOOLEAN NOT NULL DEFAULT FALSE,
                                 droitEcriture BOOLEAN NOT NULL DEFAULT FALSE,
-                                droitAccees DATE
+                                dateAccees DATETIME
 );
 
 CREATE TABLE groupe (
