@@ -18,6 +18,7 @@ import java.util.*;
 
 /**
  * Class pour les formulaires de fichiers
+ *
  * @author hesscode
  */
 public class FormFichier
@@ -31,6 +32,7 @@ public class FormFichier
 
     /**
      * sauvegarde un fichier
+     *
      * @param req
      * @param chemin
      * @return le fichier sauvegarder
@@ -115,12 +117,13 @@ public class FormFichier
 
     /**
      * Crée un fichier
+     *
      * @param req
      * @param path
      * @param u
      * @return le Fichier créer
      */
-    public Fichier creerFichier(HttpServletRequest req, Path path, User u)
+    public Fichier creerFichier(HttpServletRequest req, Path path, User u) throws SQLException
     {
         Fichier fichier = new Fichier();
 
@@ -160,6 +163,9 @@ public class FormFichier
         fichier.setDateCreation(date);
         fichier.setPublic(isPublic);
 
+        ArrayList<Integer> usersId = utilisateurs();
+
+
 
         File f = new File(chemin);
         try
@@ -171,7 +177,17 @@ public class FormFichier
                 {
                     insertFile(chemin, id, dateTS, isPublic, nomFichier);
                     Integer documentId = getDocumentId(nomFichier);
-                    linkFileUser(documentId, id, dateTS);
+                    if(isPublic)
+                    {
+                        for (int userId : usersId)
+                        {
+                            linkFileUser(documentId, userId, dateTS);
+                        }
+                    }
+                    else
+                    {
+                        linkFileUser(documentId, id, dateTS);
+                    }
                 } catch (Exception e)
                 {
                     System.err.println("Echec a l'insertion du fichier dans la base de donnée");
@@ -191,6 +207,7 @@ public class FormFichier
 
     /**
      * Lis tout le contenu d'un fichier
+     *
      * @param documentId
      * @param fichier
      * @return le contenu du fichier
@@ -211,6 +228,7 @@ public class FormFichier
 
     /**
      * Lis tout le contenu d'un fichier
+     *
      * @param path
      * @return Tout ce que le fichier contient
      * @throws IOException
@@ -233,6 +251,7 @@ public class FormFichier
 
     /**
      * Récupère les documents accessibles selon l'utilisateur
+     *
      * @param u
      * @return Liste des documents accessibles
      * @throws Exception
@@ -246,7 +265,7 @@ public class FormFichier
         String res = form.getS().requete(req);
         res = res.strip();
 
-        if(res.isEmpty())
+        if (res.isEmpty())
         {
             return listRes;
         }
@@ -262,6 +281,7 @@ public class FormFichier
 
     /**
      * Insère dans la bdd le fichier
+     *
      * @param chemin
      * @param id
      * @param dateTS
@@ -277,6 +297,7 @@ public class FormFichier
 
         System.out.println(requete);
         String res = form.getS().requete(requete);
+        res = res.strip();
 
         if (Integer.parseInt(res) != 1)
         {
@@ -286,6 +307,7 @@ public class FormFichier
 
     /**
      * Lie l'utilisateur à un document
+     *
      * @param documentId
      * @param userId
      * @param dateAccees
@@ -308,6 +330,7 @@ public class FormFichier
 
     /**
      * Récupère le path d'un fichier
+     *
      * @param documentId
      * @return filePath
      * @throws SQLException
@@ -326,6 +349,7 @@ public class FormFichier
 
     /**
      * Récupère le nom du fichier
+     *
      * @param documentId
      * @return fileName
      * @throws SQLException
@@ -343,6 +367,7 @@ public class FormFichier
 
     /**
      * Récupère l'id du document
+     *
      * @param name
      * @return id_document
      * @throws SQLException
@@ -362,6 +387,7 @@ public class FormFichier
 
     /**
      * Récupère l'id du user
+     *
      * @param email
      * @param nickname
      * @return id_user
@@ -375,7 +401,7 @@ public class FormFichier
 
         res = res.strip();
 
-        if(res.isEmpty())
+        if (res.isEmpty())
         {
             return 0;
         }
@@ -387,6 +413,7 @@ public class FormFichier
 
     /**
      * Affiche les demandes d'amis
+     *
      * @param request
      * @return ArrayList des demandes d'amis
      * @throws Exception
@@ -408,6 +435,7 @@ public class FormFichier
 
     /**
      * Affiche les demandes d'amis en attente
+     *
      * @param request
      * @return ArrayList des demandes d'amis
      * @throws Exception
@@ -428,6 +456,7 @@ public class FormFichier
 
     /**
      * methode bis pour les demandes d'attente / amis
+     *
      * @param lDemande
      * @param req
      * @throws SQLException
@@ -438,7 +467,7 @@ public class FormFichier
         String res = form.getS().requete(req);
         res = res.strip();
 
-        if(res.isEmpty())
+        if (res.isEmpty())
             return;
 
         String[] elements = res.split(" ");
@@ -452,6 +481,7 @@ public class FormFichier
 
     /**
      * Donne le nickname de l'utilisateur
+     *
      * @param idUser
      * @return nickname
      * @throws SQLException
@@ -467,6 +497,7 @@ public class FormFichier
 
     /**
      * Accepte la demande d'ami
+     *
      * @param request
      * @return vrai si l'update a été réussi et faux sinon
      * @throws Exception
@@ -495,7 +526,6 @@ public class FormFichier
         String res = form.getS().requete(req);
 
 
-
         if (Integer.parseInt(res) != 1)
         {
             throw new Exception("L'insertion a échouée");
@@ -504,6 +534,7 @@ public class FormFichier
 
     /**
      * ajoute 2 personnes entre eux
+     *
      * @param request
      * @return
      * @throws Exception
@@ -511,6 +542,7 @@ public class FormFichier
     public boolean ajoutAmis(HttpServletRequest request) throws Exception
     {
         String pseudoAmi = request.getParameter("pseudoAmi");
+        System.out.println(pseudoAmi);
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("sessionU");
         int user1_id = getUserId(u.getMail(), u.getPseudo());
@@ -521,6 +553,7 @@ public class FormFichier
         Timestamp dateTS = new Timestamp(date.getTime());
 
         String req = "INSERT INTO friends(user1_id, user2_id, demandeCreer, demandeAcceptee) VALUES(" + user1_id + ", " + user2_id + ", '" + dateTS + "', " + 0 + ");";
+        System.out.println(req);
         String res = form.getS().requete(req);
 
         System.out.println(req);
@@ -532,6 +565,7 @@ public class FormFichier
 
     /**
      * Vérifie si ils sont déjà amis.
+     *
      * @param user1_id
      * @param user2_id
      * @return Vraie si ils sont amis ou faux sinon
@@ -545,11 +579,10 @@ public class FormFichier
         res = res.strip();
         int amis = Integer.parseInt(res);
 
-        if(amis == 0)
+        if (amis == 0)
         {
             return false;
-        }
-        else
+        } else
         {
             return true;
         }
@@ -557,6 +590,7 @@ public class FormFichier
 
     /**
      * Cherche les pseudos des utilisateurs et les stocks dans une ArrayList
+     *
      * @return ArrayList de pseudo des utilisateurs
      * @throws SQLException
      */
@@ -566,13 +600,13 @@ public class FormFichier
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("sessionU");
         int userId = getUserId(u.getMail(), u.getPseudo());
-        String req = "SELECT u.nickname FROM users u LEFT JOIN friends f ON (u.id = f.user1_id AND f.user2_id = " + userId +") " +
+        String req = "SELECT u.nickname FROM users u LEFT JOIN friends f ON (u.id = f.user1_id AND f.user2_id = " + userId + ") " +
                 "OR (u.id = f.user2_id = " + userId + " ) WHERE f.user2_id IS NULL AND u.id != " + userId + ";";
 
         String res = form.getS().requete(req);
         res = res.strip();
 
-        if(res.isEmpty())
+        if (res.isEmpty())
         {
             return listeUsers;
         }
@@ -587,6 +621,23 @@ public class FormFichier
 
         request.setAttribute("listeUsers", listeUsers);
         return listeUsers;
+    }
+
+    public ArrayList<Integer> utilisateurs() throws SQLException
+    {
+        ArrayList<Integer> usersId = new ArrayList<>();
+        String req = "SELECT id FROM users";
+        String res = form.getS().requete(req);
+
+        res.strip();
+        String[] elements = res.split(" ");
+
+        for (String s : elements)
+        {
+            usersId.add(Integer.parseInt(s));
+        }
+
+        return usersId;
     }
 
     /**
@@ -612,6 +663,7 @@ public class FormFichier
 
     /**
      * Affiche la liste d'amis
+     *
      * @param request
      * @return la liste d'amis la personne connecté
      * @throws Exception
@@ -629,13 +681,13 @@ public class FormFichier
         lAmis1 = listeAmis_user1(user_id);
         lAmis2 = listeAmis_user2(user_id);
 
-        for(int idAmi : lAmis1)
+        for (int idAmi : lAmis1)
         {
             s = getNicknameUser(idAmi);
             lAmis.add(s);
         }
 
-        for(int idAmi : lAmis2)
+        for (int idAmi : lAmis2)
         {
             s = getNicknameUser(idAmi);
             lAmis.add(s);
@@ -645,8 +697,50 @@ public class FormFichier
         return lAmis;
     }
 
+    public ArrayList<String> listeAmisModif(int documentId, int userId) throws Exception
+    {
+        ArrayList<Integer> lAmisId;
+        ArrayList<String> lAmisDroit = new ArrayList<>();
+        String s;
+
+        lAmisId = listeAmis_user1(userId);
+        lAmisId.addAll(listeAmis_user2(userId));
+
+
+        for (int idAmi : lAmisId)
+        {
+            s = getNicknameUser(idAmi);
+            if (!aAccees(idAmi, documentId))
+            {
+
+                System.out.println(s + " n'a pas acces a ce fichier " + documentId);
+                lAmisDroit.add(s);
+            } else
+            {
+                System.out.println(s + " a acces a ce fichier " + documentId);
+            }
+
+        }
+        return lAmisDroit;
+    }
+
+
+    public boolean aAccees(int userId, int documentId) throws SQLException
+    {
+        String req = "SELECT COUNT(id) FROM acceesDocument WHERE user_id = " + userId + " AND document_id = " + documentId + ";";
+        String res = form.getS().requete(req);
+        res = res.strip();
+        System.out.println("Res = " + res + " userId = " + userId + " documentId = " + documentId);
+
+        if (Integer.parseInt(res) == 1)
+        {
+            return true;
+        } else return false;
+    }
+
     /**
      * Check la liste d'amis 1
+     *
      * @param userId
      * @return ArrayList d'amis 1
      * @throws SQLException
@@ -660,6 +754,7 @@ public class FormFichier
 
     /**
      * Check la liste d'amis 2
+     *
      * @param userId
      * @return ArrayList d'amis 2
      * @throws SQLException
@@ -673,19 +768,20 @@ public class FormFichier
 
     /**
      * Donne tout les amis de la personne en question
+     *
      * @param req
      * @return ArrayList d'amis
      * @throws SQLException
      */
     private ArrayList<Integer> getALIntegers(String req) throws SQLException
     {
-        ArrayList<Integer> lAmis_user= new ArrayList<>();
+        ArrayList<Integer> lAmis_user = new ArrayList<>();
         int user_id;
 
         String res = form.getS().requete(req);
         res = res.strip();
 
-        if(res.isEmpty())
+        if (res.isEmpty())
         {
             return lAmis_user;
         }
@@ -703,6 +799,7 @@ public class FormFichier
 
     /**
      * Donne le droit a un autre utilisateur pour les fichiers
+     *
      * @param name
      * @return
      */
@@ -717,15 +814,29 @@ public class FormFichier
         String res = form.getS().requete(req);
 
         if (Integer.parseInt(res) != 1)
-        {
             throw new Exception("L'update a échouée");
-        } else
-
-        return false;
+        else
+            return false;
     }
+
+//    public boolean donnerDroit(int id)
+//    {
+//        Date date = new Date();
+//        Timestamp dateTS = new Timestamp(date.getTime());
+//        String req = "INSERT INTO acceesDocument(document_id, user_id, droitLecture, droitEcriture, dateAccees) VALUES (" +
+//                documentId + ", " + userId + ", true, true, '" + dateTS + "');";
+//        System.out.println(req);
+//        String res = form.getS().requete(req);
+//
+//        if (Integer.parseInt(res) != 1)
+//            throw new Exception("L'update a échouée");
+//        else
+//            return false;
+//    }
 
     /**
      * Vérifie le nom du fichier si il est valide ou non
+     *
      * @param nom
      * @throws Exception
      */

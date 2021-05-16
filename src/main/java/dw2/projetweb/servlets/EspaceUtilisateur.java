@@ -51,7 +51,8 @@ public class EspaceUtilisateur extends HttpServlet
             f.demandeAmis(req);
             f.demandeAttente(req);
             f.listeAmis(req);
-        } catch (SQLException throwables)
+        }
+        catch (SQLException throwables)
         {
             throwables.printStackTrace();
         } catch (Exception e)

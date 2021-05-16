@@ -58,13 +58,13 @@
                         </a>
                         <form action="${pageContext.request.contextPath}/DonnerDroit" method="post">
                             <select name="listeUtilisateur">
-                                <c:forEach items="${requestScope.lAmis}" var="ami">
+                                <c:forEach items="${requestScope.lAmisDroit}" var="ami">
                                     <option name="ami" value="${ami},${documentId}">
-                                        ${ami}
+                                            ${ami}
                                     </option>
                                 </c:forEach>
                             </select>
-                            <input type="submit" value="donnerDroit" name="donnerDroit" />
+                            <input type="submit" value="donnerDroit" name="donnerDroit"/>
                         </form>
                     </li>
                 </c:forEach>
@@ -91,33 +91,35 @@
 <div>
     <h2> Ajouter des amis </h2>
     <c:if test="${requestScope.listeUsers ne null}">
-        <ul>
-            <c:forEach items="${requestScope.listeUsers}" var="userNickname">
-                <li>
-                    <a href="${pageContext.request.contextPath}/EspaceUtilisateur?pseudoAmi=<c:out value="${userNickname}"/>">
-                        <c:out value="${userNickname}"/>
-                    </a>
-                </li>
-            </c:forEach>
-        </ul>
+
+        <form action="${pageContext.request.contextPath}/AjoutAmi" method="post">
+            <select name="pseudoAmi">
+                <c:forEach items="${requestScope.listeUsers}" var="userNickname">
+                            <option name="pseudoAmi" value="${userNickname}">
+                                <c:out value="${userNickname}"/>
+                            </option>
+                </c:forEach>
+            </select>
+        <input type="submit" value="Ajouter en ami" name="ajouter en ami"/>
+        </form>
     </c:if>
 </div>
 
 <div>
-<h2> Demande d'amis reçu </h2>
-<c:if test="${requestScope.lDemandeAmis ne null}">
-    <ul>
-    <c:forEach items="${requestScope.lDemandeAmis}" var="lDemandeAmi">
-        <li>
-            <c:out value="${lDemandeAmi}"/>
-            <form action="${pageContext.request.contextPath}/Amis"
-                  method="post">
-                <button type="submit" value="${lDemandeAmi}" id="acceptDA" name="acceptDA"> Accepter</button>
-            </form>
-        </li>
-    </c:forEach>
-    </ul>
-</c:if>
+    <h2> Demande d'amis reçu </h2>
+    <c:if test="${requestScope.lDemandeAmis ne null}">
+        <ul>
+            <c:forEach items="${requestScope.lDemandeAmis}" var="lDemandeAmi">
+                <li>
+                    <c:out value="${lDemandeAmi}"/>
+                    <form action="${pageContext.request.contextPath}/Amis"
+                          method="post">
+                        <button type="submit" value="${lDemandeAmi}" id="acceptDA" name="acceptDA"> Accepter</button>
+                    </form>
+                </li>
+            </c:forEach>
+        </ul>
+    </c:if>
 </div>
 
 <div>
@@ -134,8 +136,8 @@
 </div>
 
 <div>
-<h2> Gérer mon compte </h2>
-<%--     Gérer son compte       --%>
+    <h2> Gérer mon compte </h2>
+    <%--     Gérer son compte       --%>
 </div>
 </body>
 </html>

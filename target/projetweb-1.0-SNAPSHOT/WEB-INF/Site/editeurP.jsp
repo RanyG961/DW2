@@ -38,11 +38,6 @@
 <%--        <%@ include file="messagerie.jsp" %>--%>
     <c:import url="messagerie.jsp" />
     </div>
-    <!-- Social -->
-    <div class=" bg-yellow-200 w-full h-1/6 rounded-lg ">
-<%--        <%@ include file="social.jsp" %>--%>
-    <c:import url="social.jsp" />
-    </div>
 </div>
 
 

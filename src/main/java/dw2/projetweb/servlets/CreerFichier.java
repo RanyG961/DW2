@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.stream.Stream;
 
 @WebServlet("/CreerFichier")
@@ -40,7 +41,14 @@ public class CreerFichier extends HttpServlet
 
 
         FormFichier f = new FormFichier();
-        Fichier file = f.creerFichier(req, path, u);
+        Fichier file = null;
+        try
+        {
+            file = f.creerFichier(req, path, u);
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
 
         req.setAttribute("form", f);
         req.setAttribute("fichier", file);
