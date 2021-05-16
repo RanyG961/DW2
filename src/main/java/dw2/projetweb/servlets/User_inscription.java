@@ -17,6 +17,8 @@ import java.text.ParseException;
 public class User_inscription extends HttpServlet
 {
     private FormUser formU = new FormUser();
+    public static final String SERVLET = "/EspaceUtilisateur";
+
 
     public User_inscription()
     {
@@ -49,7 +51,7 @@ public class User_inscription extends HttpServlet
         if(formU.getErreurs().isEmpty())
         {
             session.setAttribute("sessionU", u);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/Site/espaceUtilisateur.jsp").forward(req, resp);
+            this.getServletContext().getRequestDispatcher(SERVLET).forward(req, resp);
         }
         else
         {

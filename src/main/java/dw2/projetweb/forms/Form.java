@@ -121,11 +121,16 @@ public class Form
             System.out.println(req);
             String res = s.requete(req);
 
+            System.out.println("Resultat : " + res);
+
             if (Integer.parseInt(res) != 1)
             {
                 throw new Exception("L'insertion a échouée");
-            } else return Integer.parseInt(res) == 1;
-//            System.out.println("Ca a marché");
+            } else
+            {
+                System.out.println("Ca a marché");
+                return Integer.parseInt(res) == 1;
+            }
         }
     }
 

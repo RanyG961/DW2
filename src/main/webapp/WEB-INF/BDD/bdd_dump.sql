@@ -238,7 +238,7 @@ CREATE TABLE `users` (
   `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `birthdate` date NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nickname` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nickname` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)

@@ -2,7 +2,7 @@
 <dataSource name="hesscode@localhost">
   <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.21">
     <root id="1">
-      <ServerVersion>10.5.9</ServerVersion>
+      <ServerVersion>10.5.10</ServerVersion>
       <Grants>|root||mysql|localhost|ALTER|G
 |root||root|localhost|ALTER|G
 |root||mysql|localhost|ALTER ROUTINE|G
@@ -1516,7 +1516,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
     </column>
     <column id="418" parent="343" name="nickname">
       <Position>6</Position>
-      <DataType>varchar(10)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="419" parent="343" name="mail">

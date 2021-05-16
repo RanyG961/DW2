@@ -13,8 +13,13 @@ import java.sql.Array;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Class pour les formulaires de fichiers
+ * @author hesscode
+ */
 public class FormFichier
 {
     private final Form form = new Form();
@@ -239,9 +244,14 @@ public class FormFichier
 
         String req = "SELECT document_id FROM acceesDocument WHERE user_id = " + idUser + " AND droitLecture = 1 AND droitEcriture = 1";
         String res = form.getS().requete(req);
+        res = res.strip();
+
+        if(res.isEmpty())
+        {
+            return listRes;
+        }
 
         String[] elements = res.split(" ");
-
         for (String s : elements)
         {
             listRes.add(Integer.parseInt(s));
@@ -309,7 +319,7 @@ public class FormFichier
         String res = form.getS().requete(req);
 
 //
-        res = res.substring(0, res.length() - 1);
+        res = res.strip();
 
         return res;
     }
@@ -326,7 +336,7 @@ public class FormFichier
 
         String res = form.getS().requete(req);
 
-        res = res.substring(0, res.length() - 1);
+        res = res.strip();
 
         return res;
     }
@@ -343,7 +353,7 @@ public class FormFichier
 
         String res = form.getS().requete(req);
 
-        res = res.substring(0, res.length() - 1);
+        res = res.strip();
 
         Integer id = Integer.parseInt(res);
 
@@ -363,7 +373,12 @@ public class FormFichier
 
         String res = form.getS().requete(req);
 
-        res = res.substring(0, res.length() - 1);
+        res = res.strip();
+
+        if(res.isEmpty())
+        {
+            return 0;
+        }
 
         Integer id = Integer.parseInt(res);
 
@@ -385,48 +400,101 @@ public class FormFichier
         int idUser1 = 0;
 
         String req = "SELECT user1_id FROM friends WHERE demandeAcceptee = 0 AND user2_id = " + user2_id + ";";
-        String res = form.getS().requete(req);
-
-        String[] elements = res.split(" ");
-
-        for (String s : elements)
-        {
-            idUser1 = Integer.parseInt(s);
-            lDemandeAmis.add(getNicknameUser(idUser1));
-        }
-
+        lDemande(lDemandeAmis, req);
         request.setAttribute("lDemandeAmis", lDemandeAmis);
 
         return lDemandeAmis;
     }
 
+    /**
+     * Affiche les demandes d'amis en attente
+     * @param request
+     * @return ArrayList des demandes d'amis
+     * @throws Exception
+     */
+    public ArrayList<String> demandeAttente(HttpServletRequest request) throws Exception
+    {
+        ArrayList<String> lDemandeAttente = new ArrayList<>();
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("sessionU");
+        int user1_id = getUserId(u.getMail(), u.getPseudo());
+
+        String req = "SELECT user2_id FROM friends WHERE demandeAcceptee = 0 AND user1_id = " + user1_id + ";";
+        lDemande(lDemandeAttente, req);
+        request.setAttribute("lDemandeAttente", lDemandeAttente);
+
+        return lDemandeAttente;
+    }
+
+    /**
+     * methode bis pour les demandes d'attente / amis
+     * @param lDemande
+     * @param req
+     * @throws SQLException
+     */
+    private void lDemande(ArrayList<String> lDemande, String req) throws SQLException
+    {
+        int user_id;
+        String res = form.getS().requete(req);
+        res = res.strip();
+
+        if(res.isEmpty())
+            return;
+
+        String[] elements = res.split(" ");
+
+        for (String s : elements)
+        {
+            user_id = Integer.parseInt(s);
+            lDemande.add(getNicknameUser(user_id));
+        }
+    }
+
+    /**
+     * Donne le nickname de l'utilisateur
+     * @param idUser
+     * @return nickname
+     * @throws SQLException
+     */
     public String getNicknameUser(int idUser) throws SQLException
     {
         String req = "SELECT nickname FROM users WHERE id = " + idUser + ";";
         String res = form.getS().requete(req);
 
-        res = res.substring(0, res.length() - 1);
+        res = res.strip();
         return res;
     }
 
+    /**
+     * Accepte la demande d'ami
+     * @param request
+     * @return vrai si l'update a été réussi et faux sinon
+     * @throws Exception
+     */
     public boolean accepteAmis(HttpServletRequest request) throws Exception
     {
-        String pseudoAmi = request.getParameter("pseudoAmi");
+        String acceptAmi = request.getParameter("acceptDA");
+        System.out.println(acceptAmi);
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("sessionU");
         int user1_id = getUserId(u.getMail(), u.getPseudo());
-        int user2_id = getUserId(pseudoAmi, pseudoAmi);
+        int user2_id = getUserId(acceptAmi, acceptAmi);
 
         Date date = new Date();
 
-        Timestamp dateTS = new Timestamp(date.getTime());
+        java.time.LocalDate date1 = LocalDate.now();
 
+        java.sql.Date d = java.sql.Date.valueOf(date1);
         System.out.println("user1 = " + user1_id + " user2 = " + user2_id);
 
 
-        String req = "UPDATE friends SET demandeAcceptee = " + true + ", demandeUpdate = '" + dateTS +
-                "' WHERE user1_id = " + user1_id + " AND user2_id = " + user2_id + ";";
+        String req = "UPDATE friends SET demandeAcceptee = " + true + ", demandeUpdate = '" + d +
+                "' WHERE (user1_id = " + user1_id + " AND user2_id = " + user2_id + ") OR (" +
+                "user1_id = " + user2_id + " AND user2_id = " + user1_id + ");";
+        System.out.println(req);
         String res = form.getS().requete(req);
+
+
 
         if (Integer.parseInt(res) != 1)
         {
@@ -452,13 +520,39 @@ public class FormFichier
 
         Timestamp dateTS = new Timestamp(date.getTime());
 
-        String req = "INSERT INTO friends(user1_id, user2_id, demandeCreer) VALUES(" + user1_id + ", " + user2_id + ", '" + dateTS + "');";
+        String req = "INSERT INTO friends(user1_id, user2_id, demandeCreer, demandeAcceptee) VALUES(" + user1_id + ", " + user2_id + ", '" + dateTS + "', " + 0 + ");";
         String res = form.getS().requete(req);
 
+        System.out.println(req);
         if (Integer.parseInt(res) != 1)
         {
             throw new Exception("L'insertion a échouée");
         } else return Integer.parseInt(res) == 1;
+    }
+
+    /**
+     * Vérifie si ils sont déjà amis.
+     * @param user1_id
+     * @param user2_id
+     * @return Vraie si ils sont amis ou faux sinon
+     * @throws SQLException
+     */
+    public boolean sontAmis(int user1_id, int user2_id) throws SQLException
+    {
+        String req = "SELECT count(id) FROM friends WHERE user1_id = " + user1_id
+                + " AND user2_id = " + user2_id + ";";
+        String res = form.getS().requete(req);
+        res = res.strip();
+        int amis = Integer.parseInt(res);
+
+        if(amis == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     /**
@@ -472,11 +566,16 @@ public class FormFichier
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("sessionU");
         int userId = getUserId(u.getMail(), u.getPseudo());
-        String req = "SELECT nickname FROM users WHERE id != " + userId + ";";
+        String req = "SELECT u.nickname FROM users u LEFT JOIN friends f ON (u.id = f.user1_id AND f.user2_id = " + userId +") " +
+                "OR (u.id = f.user2_id = " + userId + " ) WHERE f.user2_id IS NULL AND u.id != " + userId + ";";
 
         String res = form.getS().requete(req);
+        res = res.strip();
 
-        System.out.println(res);
+        if(res.isEmpty())
+        {
+            return listeUsers;
+        }
 
         String[] elements = res.split(" ");
 
@@ -484,6 +583,7 @@ public class FormFichier
         {
             listeUsers.add(s);
         }
+
 
         request.setAttribute("listeUsers", listeUsers);
         return listeUsers;
@@ -507,14 +607,15 @@ public class FormFichier
             e.printStackTrace();
         }
 
-        for (Integer documentId : documentsId)
-        {
-            System.out.println("L'id du document est : " + documentId);
-        }
-
         req.setAttribute("documentsId", documentsId);
     }
 
+    /**
+     * Affiche la liste d'amis
+     * @param request
+     * @return la liste d'amis la personne connecté
+     * @throws Exception
+     */
     public ArrayList<String> listeAmis(HttpServletRequest request) throws Exception
     {
         HttpSession session = request.getSession();
@@ -544,28 +645,50 @@ public class FormFichier
         return lAmis;
     }
 
+    /**
+     * Check la liste d'amis 1
+     * @param userId
+     * @return ArrayList d'amis 1
+     * @throws SQLException
+     */
     public ArrayList<Integer> listeAmis_user1(int userId) throws SQLException
     {
-        String req = "SELECT user2_id FROM friends WHERE demandeAcceptee " + true +
+        String req = "SELECT user2_id FROM friends WHERE demandeAcceptee = " + true +
                 " AND user1_id = " + userId + ";";
         return getALIntegers(req);
     }
 
+    /**
+     * Check la liste d'amis 2
+     * @param userId
+     * @return ArrayList d'amis 2
+     * @throws SQLException
+     */
     public ArrayList<Integer> listeAmis_user2(int userId) throws SQLException
     {
-        String req = "SELECT user1_id FROM friends WHERE demandeAcceptee " + true +
+        String req = "SELECT user1_id FROM friends WHERE demandeAcceptee = " + true +
                 " AND user2_id = " + userId + ";";
         return getALIntegers(req);
     }
 
+    /**
+     * Donne tout les amis de la personne en question
+     * @param req
+     * @return ArrayList d'amis
+     * @throws SQLException
+     */
     private ArrayList<Integer> getALIntegers(String req) throws SQLException
     {
         ArrayList<Integer> lAmis_user= new ArrayList<>();
         int user_id;
 
         String res = form.getS().requete(req);
+        res = res.strip();
 
-        System.out.println(res);
+        if(res.isEmpty())
+        {
+            return lAmis_user;
+        }
 
         String[] elements = res.split(" ");
 
@@ -578,10 +701,31 @@ public class FormFichier
         return lAmis_user;
     }
 
+    /**
+     * Donne le droit a un autre utilisateur pour les fichiers
+     * @param name
+     * @return
+     */
+    public boolean donnerDroit(String name, int documentId) throws Exception
+    {
+        int userId = getUserId(name, name);
+        Date date = new Date();
+        Timestamp dateTS = new Timestamp(date.getTime());
+        String req = "INSERT INTO acceesDocument(document_id, user_id, droitLecture, droitEcriture, dateAccees) VALUES (" +
+                documentId + ", " + userId + ", true, true, '" + dateTS + "');";
+        System.out.println(req);
+        String res = form.getS().requete(req);
+
+        if (Integer.parseInt(res) != 1)
+        {
+            throw new Exception("L'update a échouée");
+        } else
+
+        return false;
+    }
 
     /**
      * Vérifie le nom du fichier si il est valide ou non
-     *
      * @param nom
      * @throws Exception
      */
@@ -693,5 +837,4 @@ public class FormFichier
             }
         }
     }
-
 }

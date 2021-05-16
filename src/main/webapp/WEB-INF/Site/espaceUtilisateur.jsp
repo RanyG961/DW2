@@ -50,15 +50,26 @@
         <h3> Modifier les fichiers déjà créés </h3>
         <%--      Afficher tout les fichiers auquel il a le droit d'accès          --%>
         <ul>
-            <c:forEach items="${requestScope.documentsId}" var="documentId">
-                <li>
-                    <a href="${pageContext.request.contextPath}/OuvrirFichier?documentId=<c:out value="${documentId}"/>">
-                        Ouvrir le fichier <c:out value="${documentId}"/>
-                    </a>
-                </li>
-            </c:forEach>
+            <c:if test="${requestScope.documentsId ne null}">
+                <c:forEach items="${requestScope.documentsId}" var="documentId">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/OuvrirFichier?documentId=<c:out value="${documentId}"/>">
+                            Ouvrir le fichier <c:out value="${documentId}"/>
+                        </a>
+                        <form action="${pageContext.request.contextPath}/DonnerDroit" method="post">
+                            <select name="listeUtilisateur">
+                                <c:forEach items="${requestScope.lAmis}" var="ami">
+                                    <option name="ami" value="${ami},${documentId}">
+                                        ${ami}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <input type="submit" value="donnerDroit" name="donnerDroit" />
+                        </form>
+                    </li>
+                </c:forEach>
+            </c:if>
         </ul>
-
 
     </div>
 </div>
@@ -66,45 +77,65 @@
 <div>
     <h2> Amis </h2>
     <%--    Afficher tout ses amis        --%>
-    <ul>
-        <li>
+    <c:if test="${requestScope.lAmis ne null}">
+        <ul>
             <c:forEach items="${requestScope.lAmis}" var="ami">
-                <c:out value="${ami}" />
+                <li>
+                    <c:out value="${ami}"/>
+                </li>
             </c:forEach>
-        </li>
-    </ul>
+        </ul>
+    </c:if>
 </div>
 
 <div>
     <h2> Ajouter des amis </h2>
-    <ul>
-        <c:forEach items="${requestScope.listeUsers}" var="userNickname">
-            <li>
-                <a href="${pageContext.request.contextPath}/EspaceUtilisateur?pseudoAmi=<c:out value="${userNickname}"/>">
-                    <c:out value="${userNickname}" />
-                </a>
-            </li>
-        </c:forEach>
-    </ul>
+    <c:if test="${requestScope.listeUsers ne null}">
+        <ul>
+            <c:forEach items="${requestScope.listeUsers}" var="userNickname">
+                <li>
+                    <a href="${pageContext.request.contextPath}/EspaceUtilisateur?pseudoAmi=<c:out value="${userNickname}"/>">
+                        <c:out value="${userNickname}"/>
+                    </a>
+                </li>
+            </c:forEach>
+        </ul>
+    </c:if>
 </div>
 
 <div>
-    <h2> Demande d'amis </h2>
+<h2> Demande d'amis reçu </h2>
+<c:if test="${requestScope.lDemandeAmis ne null}">
     <ul>
-        <c:forEach items="${requestScope.lDemandeAmis}" var="lDemandeAmi">
+    <c:forEach items="${requestScope.lDemandeAmis}" var="lDemandeAmi">
         <li>
-            <c:out value="${lDemandeAmi}" />
-            <form action="${pageContext.request.contextPath}/EspaceUtilisateur?acceptDA=${lDemandeAmi}" method="get">
-                <button type="submit"> Accepter </button>
+            <c:out value="${lDemandeAmi}"/>
+            <form action="${pageContext.request.contextPath}/Amis"
+                  method="post">
+                <button type="submit" value="${lDemandeAmi}" id="acceptDA" name="acceptDA"> Accepter</button>
             </form>
         </li>
-        </c:forEach>
+    </c:forEach>
     </ul>
+</c:if>
 </div>
 
 <div>
-    <h2> Gérer mon compte </h2>
-    <%--     Gérer son compte       --%>
+    <h2> Demande d'amis en attente</h2>
+    <c:if test="${requestScope.lDemandeAttente ne null}">
+        <ul>
+            <c:forEach items="${requestScope.lDemandeAttente}" var="lDemandeAttente">
+                <li>
+                    <c:out value="${lDemandeAttente}"/>
+                </li>
+            </c:forEach>
+        </ul>
+    </c:if>
+</div>
+
+<div>
+<h2> Gérer mon compte </h2>
+<%--     Gérer son compte       --%>
 </div>
 </body>
 </html>
