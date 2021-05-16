@@ -19,6 +19,9 @@ public class Connexion
 
     private int res;
 
+    /**
+     *
+     */
     public Connexion()
     {
         try
@@ -36,6 +39,10 @@ public class Connexion
         }
     }
 
+    /**
+     *
+     * @param query
+     */
     public Connexion(String query)
     {
         try
@@ -51,6 +58,9 @@ public class Connexion
         }
     }
 
+    /**
+     *
+     */
     public void deconnexion()
     {
         try

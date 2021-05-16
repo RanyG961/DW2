@@ -13,6 +13,10 @@ public class DbServer
     private ResultSetMetaData rsmd = null;
     private int res = 0;
 
+    /**
+     *
+     * @param c
+     */
     public DbServer(Connexion c)
     {
         stmt = c.getStmt();
@@ -22,6 +26,12 @@ public class DbServer
         res = c.getRes();
     }
 
+    /**
+     *
+     * @param query
+     * @return
+     * @throws SQLException
+     */
     public String requete(String query) throws SQLException
     {
         String[] premierMot = query.split(" ");
@@ -56,6 +66,10 @@ public class DbServer
         return resultat;
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void createDB() throws SQLException
     {
         requete("CREATE DATABASE "  + c.getJDBC_DBNAME());

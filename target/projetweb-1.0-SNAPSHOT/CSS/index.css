@@ -1,0 +1,130 @@
+/* //////////////////// VARIABLES //////////////////// */
+
+:root{
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    /* Couleur de fond du site */
+    --background-color: rgba(219, 234, 254, var(--tw-bg-opacity));
+
+    /* Couleur des boutons verts */
+    --background-vert: rgba(16, 185, 129, var(--tw-bg-opacity));
+
+    /* Couleur des boutons rouges */
+    --background-rouge: rgba(220, 38, 38, var(--tw-bg-opacity));
+
+    /* Couleur des textes rouges */
+    --color-rouge: rgba(248, 113, 113, var(--tw-text-opacity));
+}
+
+video{
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+image{
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+body::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #6649b8;
+}
+
+article{
+    width: clamp(200px, 50%, 600px);
+}
+
+/* Small screens */
+@media only screen and (max-width: 600px) {
+    .navbar {
+        bottom: 0;
+        width: 100vw;
+        height: 5rem;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .nav-link {
+        justify-content: center;
+    }
+
+    main {
+        margin: 0;
+    }
+}
+
+/* Large screens */
+@media only screen and (min-width: 600px) {
+    .navbar {
+        top: 0;
+        width: 5rem;
+        height: 100vh;
+    }
+
+    .navbar:hover {
+        width: 16rem;
+    }
+
+    .navbar:hover .link-text {
+        display: inline;
+    }
+
+    .navbar:hover .logo svg
+    {
+        margin-left: 11rem;
+    }
+
+    .navbar:hover .logo-text
+    {
+        left: 0px;
+    }
+}
+
+
+
+/* //////////////////// INIT.JSP //////////////////// */
+
+.deconnexion{
+    background-color: var(--background-rouge);
+}
+
+#connexion{
+    color : var(--color-rouge);
+}
+
+#connexion_admin{
+    color: var(--color-rouge);
+}
+
+
+/* //////////////////// USER_CONNEXION.JSP //////////////////// */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

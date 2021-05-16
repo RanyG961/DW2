@@ -1,8 +1,5 @@
 package dw2.projetweb.bdd;
 
-import dw2.projetweb.forms.formAdmin;
-import java.sql.*;
-
 public class Test
 {
     public static void main(String[] args)
