@@ -697,6 +697,13 @@ public class FormFichier
         return lAmis;
     }
 
+    /**
+     * Liste des amis qui peuvent modifier
+     * @param documentId
+     * @param userId
+     * @return
+     * @throws Exception
+     */
     public ArrayList<String> listeAmisModif(int documentId, int userId) throws Exception
     {
         ArrayList<Integer> lAmisId;
@@ -725,6 +732,13 @@ public class FormFichier
     }
 
 
+    /**
+     * Verifie si une personne a accees au fichier
+     * @param userId
+     * @param documentId
+     * @return
+     * @throws SQLException
+     */
     public boolean aAccees(int userId, int documentId) throws SQLException
     {
         String req = "SELECT COUNT(id) FROM acceesDocument WHERE user_id = " + userId + " AND document_id = " + documentId + ";";
@@ -818,21 +832,6 @@ public class FormFichier
         else
             return false;
     }
-
-//    public boolean donnerDroit(int id)
-//    {
-//        Date date = new Date();
-//        Timestamp dateTS = new Timestamp(date.getTime());
-//        String req = "INSERT INTO acceesDocument(document_id, user_id, droitLecture, droitEcriture, dateAccees) VALUES (" +
-//                documentId + ", " + userId + ", true, true, '" + dateTS + "');";
-//        System.out.println(req);
-//        String res = form.getS().requete(req);
-//
-//        if (Integer.parseInt(res) != 1)
-//            throw new Exception("L'update a échouée");
-//        else
-//            return false;
-//    }
 
     /**
      * Vérifie le nom du fichier si il est valide ou non

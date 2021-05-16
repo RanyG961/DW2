@@ -34,6 +34,7 @@
 
 <div class=" w-2/12 h5/6 rounded-lg">
     <!-- Messagerie -->
+    <a href="${pageContext.request.contextPath}/EspaceUtilisateur"> Retour sur l'espace utilisateur </a>
     <div class="bg-purple-300 w-full  h-5/6 rounded-lg">
 <%--        <%@ include file="messagerie.jsp" %>--%>
     <c:import url="messagerie.jsp" />

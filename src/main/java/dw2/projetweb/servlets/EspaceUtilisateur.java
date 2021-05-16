@@ -50,8 +50,7 @@ public class EspaceUtilisateur extends HttpServlet
             f.getNicknameUsers(req);
             f.demandeAmis(req);
             f.demandeAttente(req);
-            f.listeAmis(req);
-        }
+            f.listeAmis(req); }
         catch (SQLException throwables)
         {
             throwables.printStackTrace();

@@ -58,7 +58,7 @@
                         </a>
                         <form action="${pageContext.request.contextPath}/DonnerDroit" method="post">
                             <select name="listeUtilisateur">
-                                <c:forEach items="${requestScope.lAmisDroit}" var="ami">
+                                <c:forEach items="${requestScope.lAmis}" var="ami">
                                     <option name="ami" value="${ami},${documentId}">
                                             ${ami}
                                     </option>
