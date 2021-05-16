@@ -26,6 +26,7 @@
 
         ${requestScope.fichier.name}
     </div>
+    <a href="${pageContext.request.contextPath}/EspaceUtilisateur"> Retour sur l'espace utilisateur </a>
 
 <!-- Editeur de texte -->
 <div class="bg-pink-200 w-full h-4/5 mx-8 rounded-lg">
