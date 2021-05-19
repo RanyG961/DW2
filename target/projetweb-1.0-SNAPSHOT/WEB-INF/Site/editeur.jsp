@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <title>Full Editor - Quill Rich Text Editor</title>
     <meta charset="utf-8">
@@ -13,11 +13,6 @@
 
 
     <link rel="stylesheet" href="lib/quill.snow.css"/>
-
-    <script src="lib/katex.min.js"></script>
-
-    <script src="lib/highlight.min.js"></script>
-    <script src="lib/quill.min.js"></script>
 
     <style>
         body > #standalone-container {
@@ -87,36 +82,36 @@
     </div>
 </div>
 
+
+<script src="lib/katex.min.js"></script>
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/quill.min.js"></script>
+
 <script type="text/javascript" src="JS/editeur.js"></script>
-<script type="text/javascript">
+
+<script>
     const pathFichier = '${requestScope.fichier.path}'
     const nomFichier = '${requestScope.fichier.name}'
     const Fichier = pathFichier + "/" + nomFichier
     const contenuFichier = [${requestScope.contenuFichier}];
-
     quill.setContents(contenuFichier)
-
     console.log(contenuFichier)
-
     let id;
+
     <c:if test="${sessionScope.sessionU.mail ne null}">
         const user = '${sessionScope.sessionU.mail}'
     </c:if>
-
     <c:if test="${sessionScope.sessionU.pseudo ne null}">
         const user = '${sessionScope.sessionU.pseudo}'
     </c:if>
-
     const URL = "ws://176.190.63.49:8080/projetweb_war_exploded/changement/" + user + "/" + nomFichier
     const ws = new WebSocket(URL)
-
     ws.onopen = event => {
         id = uuidv4();
     };
-
     ws.onclose = event => {
     };
-
     quill.on("text-change", (delta, oldDelta, source) => {
         if (source === "user") {
             let aEnvoyer = {
@@ -131,20 +126,15 @@
             ws.send(aEnvoyer)
         }
     })
-
     ws.onmessage = event => {
         let data = event.data;
         let pData = JSON.parse(data)
         // console.table(pData)
-
         let idMsg = pData.id
         console.log(idMsg + " || " + id)
         let msg = pData.delta
-
         console.table(msg)
-
-        if(id !== idMsg)
-        {
+        if (id !== idMsg) {
             quill.updateContents(msg)
         }
     }

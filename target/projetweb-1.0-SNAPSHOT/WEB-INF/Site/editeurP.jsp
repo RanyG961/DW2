@@ -24,24 +24,18 @@
 
             <p><a href="Deconnexion"> Deconnexion</a></p>
         </c:if>
+
+        ${requestScope.fichier.name}
     </div>
+    <a href="${pageContext.request.contextPath}/EspaceUtilisateur"> Retour sur l'espace utilisateur </a>
 
 <!-- Editeur de texte -->
-<div class="bg-pink-200 w-9/12 h-4/5 mx-8 rounded-lg">
+<div class="bg-pink-200 w-full h-4/5 mx-8 rounded-lg">
 <%--    <%@ include file="editeur.jsp" %>--%>
     <c:import url="editeur.jsp" />
 </div>
 
-<div class=" w-2/12 h5/6 rounded-lg">
-    <!-- Messagerie -->
-    <a href="${pageContext.request.contextPath}/EspaceUtilisateur"> Retour sur l'espace utilisateur </a>
-    <div class="bg-purple-300 w-full  h-5/6 rounded-lg">
-<%--        <%@ include file="messagerie.jsp" %>--%>
-    <c:import url="messagerie.jsp" />
-    </div>
-</div>
 
-
-<footer class="bg-blue-500 items-end w-full h-1/8 m-8">
-    <%@ include file="footer.jsp" %>
-</footer>
+<%--<footer class="bg-blue-500 items-end w-full h-1/8 m-8">--%>
+<%--    <%@ include file="footer.jsp" %>--%>
+<%--</footer>--%>

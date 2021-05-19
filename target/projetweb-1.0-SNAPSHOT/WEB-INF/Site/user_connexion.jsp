@@ -5,24 +5,44 @@
   Time: 12:01 AM
   To change this template use File | Settings | File Templates.
 --%>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE HTML>
+<html class="h-full">
 <head>
-    <title>Connexion</title>
     <meta charset="utf-8"/>
+    <title>Connexion</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../../CSS/index.css" rel="stylesheet">
 </head>
-<body>
-<div class="formulaire">
-    <h2 class="titre"> Connexion </h2>
+<body class="bg-blue-100 flex flex-col h-full">
+
+<!-- Header -->
+<header class="h-1/6 bg-blue-50 w-full font-mono text-center">
+    <%@ include file="header.jsp" %>
+</header>
+
+<div class="formulaire h-4/6 m-auto">
+    <h2 class="titre m-16 text-6xl text-blue-500"> Connexion </h2>
     <form id="formConnexion" class="form-margin-top" action="User_connexion" method="POST">
-        <div class="form-width">
-            <input type="text" placeholder="Identifiant" id="identifiant" name="identifiant" class="saisie" required/>
+        <div class="form-width space-y-6">
+            <input type="text" placeholder="Identifiant" id="identifiant" name="identifiant" class="saisie" required/></br>
             <span> ${requestScope.formU.erreurs['identifiant']}</span>
-            <input type="password" id="pwd" name="pwd" placeholder="Mot de passe" class="saisie" required/>
+            <input type="password" id="pwd" name="pwd" placeholder="Mot de passe" class="saisie" required/></br>
             <span> ${requestScope.formU.erreurs['pwd']}</span>
             <input type="submit" value="Connexion" class="bouton"/>
         </div>
     </form>
 </div>
 
+
+<!-- Footer -->
+<footer class="h-1/6 bg-blue-50 w-full font-mono mb-8 text-center align-middle">
+    <%@ include file="footer.jsp" %>
+</footer>
+
 </body>
 </html>
+
+
+
+

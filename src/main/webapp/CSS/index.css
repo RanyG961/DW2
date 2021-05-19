@@ -1,0 +1,75 @@
+/* //////////////////// VARIABLES //////////////////// */
+
+:root{
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    /* Couleur de fond du site */
+    --background-color: rgba(219, 234, 254, var(--tw-bg-opacity));
+
+    /* Couleur des boutons verts */
+    --background-vert: rgba(16, 185, 129, var(--tw-bg-opacity));
+
+    /* Couleur des boutons rouges */
+    --background-rouge: rgba(220, 38, 38, var(--tw-bg-opacity));
+
+    /* Couleur des textes rouges */
+    --color-rouge: rgba(248, 113, 113, var(--tw-text-opacity));
+}
+
+video{
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+image{
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+body::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #6649b8;
+}
+
+article{
+    width: clamp(200px, 50%, 600px);
+}
+
+
+/* //////////////////// INIT.JSP //////////////////// */
+
+.deconnexion{
+    background-color: var(--background-rouge);
+}
+
+#connexion{
+    color : var(--color-rouge);
+}
+
+#connexion_admin{
+    color: var(--color-rouge);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

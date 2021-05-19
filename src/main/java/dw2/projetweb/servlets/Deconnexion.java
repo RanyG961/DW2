@@ -11,6 +11,8 @@ import java.io.IOException;
 @WebServlet("/Deconnexion")
 public class Deconnexion extends HttpServlet
 {
+    public static final String VUE = "/WEB-INF/init.jsp";
+
     public Deconnexion()
     {
         super();
@@ -23,6 +25,7 @@ public class Deconnexion extends HttpServlet
 
         session.invalidate();
 //        System.out.println(req.getContextPath());
-        resp.sendRedirect(req.getContextPath() + "/index.jsp");
+//        resp.sendRedirect(req.getContextPath() + VUE);
+        this.getServletContext().getRequestDispatcher(VUE).forward(req, resp);
     }
 }

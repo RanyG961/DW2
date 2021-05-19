@@ -1,3 +1,5 @@
 
-<button type="button" id="menuButton" alt="new_project" class="bg-green-500 w-16 h-16">New project</button>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<img class="align-middle" src="IMG/logo.png" alt="Logo de Hesscode">
+
 

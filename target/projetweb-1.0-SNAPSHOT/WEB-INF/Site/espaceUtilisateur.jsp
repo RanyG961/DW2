@@ -6,29 +6,33 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html class="h-full">
 <head>
     <title>Espace utilisateur</title>
+    <link href="CSS/tailwind.min.css" rel="stylesheet">
+    <link href="CSS/index.css" rel="stylesheet">
 </head>
-<body>
-<div>
+<body class="bg-blue-100 flex flex-wrap h-full">
+<!-- Header -->
+<header class="h-1/6 bg-blue-50 w-full font-mono text-center">
+    <%@ include file="header.jsp" %>
+</header>
+<div class="h-4/6 w-1/5 text-center text-3xl">
     <!-- Connexion -->
-    <div class="bg-blue w-2/12  h-1/6 rounded-lg">
+    <div class="bg-blue w-2/12  h-1/6 rounded-lg ">
         <c:if test="${sessionScope.sessionU.mail ne null}">
-            <p> User : ${sessionScope.sessionU.mail} connecté </p>
+            <p> ${sessionScope.sessionU.mail}</p></br>
             <p><a href="Deconnexion">Deconnexion</a></p>
         </c:if>
 
         <c:if test="${sessionScope.sessionU.pseudo ne null}">
-            <p> User : ${sessionScope.sessionU.pseudo} connecté </p>
-
+            <p>${sessionScope.sessionU.pseudo}</p></br>
             <p><a href="Deconnexion"> Deconnexion</a></p>
         </c:if>
     </div>
 
-    <h2> Fichiers </h2>
-    <div>
-        <h3> Ajouter un fichier </h3>
+    <div class="mt-32">
+        <h3> Ajouter un fichier </h3></br>
         <%--                <form action="FichierUpload" method="post" enctype="multipart/form-data">--%>
         <%--                    <label for="nom"> Nom du fichier </label>--%>
         <%--                    <input type="text" id="nom" name="nom" value="" />--%>
@@ -39,9 +43,9 @@
         <%--                    <input type="submit" value="Enregistrer" />--%>
         <%--                </form>--%>
         <form action="CreerFichier" method="post">
-            <label for="fPublic"> Fichier public </label>
+            <label for="fPublic"> Fichier public </label></br>
             <input type="checkbox" value="fPublic" name="fPublic" id="fPublic"/>
-            <label for="btn"> Créer fichier </label>
+            <label for="btn"> Créer fichier </label></br>
             <input type="submit" value="Créer un fichier" id="btn">
         </form>
     </div>
@@ -74,7 +78,7 @@
     </div>
 </div>
 
-<div>
+<div class="text-3xl  w-1/5 ">
     <h2> Amis </h2>
     <%--    Afficher tout ses amis        --%>
     <c:if test="${requestScope.lAmis ne null}">
@@ -88,24 +92,24 @@
     </c:if>
 </div>
 
-<div>
+<div class="text-3xl  w-1/5 ">
     <h2> Ajouter des amis </h2>
     <c:if test="${requestScope.listeUsers ne null}">
 
         <form action="${pageContext.request.contextPath}/AjoutAmi" method="post">
             <select name="pseudoAmi">
                 <c:forEach items="${requestScope.listeUsers}" var="userNickname">
-                            <option name="pseudoAmi" value="${userNickname}">
-                                <c:out value="${userNickname}"/>
-                            </option>
+                    <option name="pseudoAmi" value="${userNickname}">
+                        <c:out value="${userNickname}"/>
+                    </option>
                 </c:forEach>
             </select>
-        <input type="submit" value="Ajouter en ami" name="ajouter en ami"/>
+            <input type="submit" value="Ajouter en ami" name="ajouter en ami"/>
         </form>
     </c:if>
 </div>
 
-<div>
+<div class="text-3xl  w-1/5 ">
     <h2> Demande d'amis reçu </h2>
     <c:if test="${requestScope.lDemandeAmis ne null}">
         <ul>
@@ -122,7 +126,7 @@
     </c:if>
 </div>
 
-<div>
+<div class="text-3xl w-1/5 ">
     <h2> Demande d'amis en attente</h2>
     <c:if test="${requestScope.lDemandeAttente ne null}">
         <ul>
@@ -134,10 +138,7 @@
         </ul>
     </c:if>
 </div>
-
-<div>
-    <h2> Gérer mon compte </h2>
-    <%--     Gérer son compte       --%>
-</div>
 </body>
 </html>
+
+
